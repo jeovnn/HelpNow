@@ -20,7 +20,5 @@ object pag_home: Tpag_home
     Align = alClient
     Caption = 'painel_principal'
     TabOrder = 0
-    ExplicitWidth = 993
-    ExplicitHeight = 545
   end
 end

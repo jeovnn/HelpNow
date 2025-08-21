@@ -13,10 +13,10 @@ uses
 
 type
   TForm1 = class(TForm)
+    FDPhysFBDriverLink1: TFDPhysFBDriverLink;
     FDConnection1: TFDConnection;
     FDQuery1: TFDQuery;
     DataSource1: TDataSource;
-    FDPhysFBDriverLink1: TFDPhysFBDriverLink;
   private
     { Private declarations }
   public

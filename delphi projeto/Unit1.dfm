@@ -2,8 +2,8 @@ object Form1: TForm1
   Left = 0
   Top = 0
   Caption = 'Form1'
-  ClientHeight = 441
-  ClientWidth = 624
+  ClientHeight = 633
+  ClientWidth = 825
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -11,6 +11,10 @@ object Form1: TForm1
   Font.Name = 'Segoe UI'
   Font.Style = []
   TextHeight = 15
+  object FDPhysFBDriverLink1: TFDPhysFBDriverLink
+    Left = 88
+    Top = 168
+  end
   object FDConnection1: TFDConnection
     Params.Strings = (
       'User_Name=sysdba'
@@ -28,9 +32,5 @@ object Form1: TForm1
   object DataSource1: TDataSource
     Left = 288
     Top = 96
-  end
-  object FDPhysFBDriverLink1: TFDPhysFBDriverLink
-    Left = 88
-    Top = 168
   end
 end

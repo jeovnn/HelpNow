@@ -1700,7 +1700,6 @@ object pag_inicial: Tpag_inicial
     Color = clCoral
     ParentBackground = False
     TabOrder = 0
-    ExplicitHeight = 545
     object botao_login: TImage
       Left = 48
       Top = 271

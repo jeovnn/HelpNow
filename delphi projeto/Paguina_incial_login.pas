@@ -75,19 +75,13 @@ end;
 procedure Tpag_inicial.botao_loginMouseDown(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 begin
-botao_login.Height := 71;
-botao_login.Width := 280;
-botao_login.top := 344;
-botao_login.left := 70;
+//temp
 end;
 
 procedure Tpag_inicial.botao_loginMouseUp(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 begin
-botao_login.Height := 81;
-botao_login.Width := 300;
-botao_login.top := 339;
-botao_login.left := 60;
+//temp
 end;
 
 end.

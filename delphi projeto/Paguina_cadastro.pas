@@ -1,0 +1,67 @@
+unit Paguina_cadastro;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls,
+  Vcl.Imaging.pngimage, Vcl.Imaging.jpeg;
+
+type
+  Tpag_cadastro = class(TForm)
+    painel_principal: TPanel;
+    text_login_pag: TLabel;
+    descricao: TLabel;
+    label_jaconta: TLabel;
+    goto_cadastro: TLabel;
+    painel_email: TPanel;
+    imagem_email: TImage;
+    label_email: TLabel;
+    email_cad: TEdit;
+    painel_senha_confirmação: TPanel;
+    senha_conf_cad: TEdit;
+    painel_nome: TPanel;
+    imagem_nome: TImage;
+    label_nome: TLabel;
+    nome_cad: TEdit;
+    painel_senha: TPanel;
+    imagem_senha: TImage;
+    label_senha1: TLabel;
+    senha_cad: TEdit;
+    imagem_cong_senha: TImage;
+    labal_senha_conf: TLabel;
+    email_direção: TLabel;
+    nome_direção: TLabel;
+    senha_conf_direção: TLabel;
+    senha_direção: TLabel;
+    retorna_menu: TImage;
+    Image2: TImage;
+    procedure goto_cadastroClick(Sender: TObject);
+    procedure retorna_menuClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  pag_cadastro: Tpag_cadastro;
+
+implementation
+
+uses
+  pg_home, Paguina_incial_login, Paguina_login;
+
+{$R *.dfm}
+
+procedure Tpag_cadastro.goto_cadastroClick(Sender: TObject);
+begin
+ pag_home.MostrarFormularioEmbed(pag_login);
+end;
+
+procedure Tpag_cadastro.retorna_menuClick(Sender: TObject);
+begin
+ pag_home.MostrarFormularioEmbed(pag_inicial);
+end;
+
+end.

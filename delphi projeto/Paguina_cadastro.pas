@@ -34,10 +34,17 @@ type
     nome_direção: TLabel;
     senha_conf_direção: TLabel;
     senha_direção: TLabel;
-    retorna_menu: TImage;
     Image2: TImage;
+    retorna_ao_menu: TImage;
+    Image1: TImage;
     procedure goto_cadastroClick(Sender: TObject);
     procedure retorna_menuClick(Sender: TObject);
+    procedure retorna_ao_menuClick(Sender: TObject);
+    procedure retorna_ao_menuMouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure retorna_ao_menuMouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -46,6 +53,7 @@ type
 
 var
   pag_cadastro: Tpag_cadastro;
+    high_voltar : Integer;
 
 implementation
 
@@ -54,9 +62,31 @@ uses
 
 {$R *.dfm}
 
+procedure Tpag_cadastro.FormCreate(Sender: TObject);
+begin
+    high_voltar := retorna_ao_menu.Top;
+end;
+
 procedure Tpag_cadastro.goto_cadastroClick(Sender: TObject);
 begin
  pag_home.MostrarFormularioEmbed(pag_login);
+end;
+
+procedure Tpag_cadastro.retorna_ao_menuClick(Sender: TObject);
+begin
+pag_home.MostrarFormularioEmbed(pag_inicial);
+end;
+
+procedure Tpag_cadastro.retorna_ao_menuMouseDown(Sender: TObject;
+  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+        retorna_ao_menu.Top := high_voltar;
+end;
+
+procedure Tpag_cadastro.retorna_ao_menuMouseUp(Sender: TObject;
+  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+        retorna_ao_menu.Top := high_voltar+5;
 end;
 
 procedure Tpag_cadastro.retorna_menuClick(Sender: TObject);

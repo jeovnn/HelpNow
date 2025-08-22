@@ -25,6 +25,7 @@ type
       Shift: TShiftState; X, Y: Integer);
     procedure botao_cadastroMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -33,6 +34,8 @@ type
 
 var
   pag_inicial: Tpag_inicial;
+  high_login : Integer;
+  high_cadastro : Integer;
 
 implementation
 
@@ -46,19 +49,13 @@ uses
 procedure Tpag_inicial.botao_cadastroMouseDown(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
-botao_login.Height := 71;
-botao_login.Width := 280;
-botao_login.top := 344;
-botao_login.left := 70;
+      botao_cadastro.Top := high_cadastro+10;
 end;
 
 procedure Tpag_inicial.botao_cadastroMouseUp(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
-botao_login.Height := 81;
-botao_login.Width := 300;
-botao_login.top := 339;
-botao_login.left := 60;
+      botao_cadastro.Top := high_cadastro;
 end;
 
 procedure Tpag_inicial.botao_loginClick(Sender: TObject);
@@ -75,13 +72,19 @@ end;
 procedure Tpag_inicial.botao_loginMouseDown(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 begin
-//temp
+        botao_login.Top := high_login+10;
 end;
 
 procedure Tpag_inicial.botao_loginMouseUp(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 begin
-//temp
+        botao_login.Top := high_login;
+end;
+
+procedure Tpag_inicial.FormCreate(Sender: TObject);
+begin
+  high_login := botao_login.Top;
+  high_cadastro := botao_cadastro.Top;
 end;
 
 end.

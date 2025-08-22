@@ -1791,7 +1791,7 @@
     object retorna_ao_menu: TImage
       Left = 5
       Top = 5
-      Width = 110
+      Width = 100
       Height = 41
       Picture.Data = {
         0A544A504547496D616765EC4B0000FFD8FFE000104A46494600010101007800

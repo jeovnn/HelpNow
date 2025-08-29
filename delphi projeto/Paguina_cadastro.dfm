@@ -3276,7 +3276,6 @@
         Font.Style = [fsBold]
         ParentFont = False
         Layout = tlCenter
-        ExplicitLeft = 4
         ExplicitHeight = 23
       end
       object email_cad: TEdit
@@ -3523,7 +3522,7 @@
         Font.Style = [fsBold]
         ParentFont = False
         Layout = tlCenter
-        ExplicitLeft = 10
+        ExplicitHeight = 23
       end
       object nome_cad: TEdit
         AlignWithMargins = True
@@ -3771,7 +3770,7 @@
         Font.Style = [fsBold]
         ParentFont = False
         Layout = tlCenter
-        ExplicitLeft = 12
+        ExplicitHeight = 23
       end
       object senha_cad: TEdit
         AlignWithMargins = True

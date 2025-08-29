@@ -24,6 +24,7 @@ type
     goto_cadastro: TLabel;
     retorna_ao_menu: TImage;
     Image1: TImage;
+    Image2: TImage;
     procedure goto_cadastroClick(Sender: TObject);
     procedure retorna_ao_menuClick(Sender: TObject);
     procedure retorna_ao_menuMouseUp(Sender: TObject; Button: TMouseButton;

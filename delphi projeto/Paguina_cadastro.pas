@@ -3,9 +3,10 @@ unit Paguina_cadastro;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls,
-  Vcl.Imaging.pngimage, Vcl.Imaging.jpeg;
+  Vcl.Imaging.pngimage, Vcl.Imaging.jpeg, conexao;
 
 type
   Tpag_cadastro = class(TForm)
@@ -34,7 +35,6 @@ type
     nome_direção: TLabel;
     senha_conf_direção: TLabel;
     senha_direção: TLabel;
-    Image2: TImage;
     retorna_ao_menu: TImage;
     Image1: TImage;
     procedure goto_cadastroClick(Sender: TObject);
@@ -53,7 +53,7 @@ type
 
 var
   pag_cadastro: Tpag_cadastro;
-    high_voltar : Integer;
+  high_voltar: Integer;
 
 implementation
 
@@ -64,34 +64,34 @@ uses
 
 procedure Tpag_cadastro.FormCreate(Sender: TObject);
 begin
-    high_voltar := retorna_ao_menu.Top;
+  high_voltar := retorna_ao_menu.Top;
 end;
 
 procedure Tpag_cadastro.goto_cadastroClick(Sender: TObject);
 begin
- pag_home.MostrarFormularioEmbed(pag_login);
+  pag_home.MostrarFormularioEmbed(pag_login);
 end;
 
 procedure Tpag_cadastro.retorna_ao_menuClick(Sender: TObject);
 begin
-pag_home.MostrarFormularioEmbed(pag_inicial);
+  pag_home.MostrarFormularioEmbed(pag_inicial);
 end;
 
 procedure Tpag_cadastro.retorna_ao_menuMouseDown(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
-        retorna_ao_menu.Top := high_voltar;
+  retorna_ao_menu.Top := high_voltar;
 end;
 
 procedure Tpag_cadastro.retorna_ao_menuMouseUp(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
-        retorna_ao_menu.Top := high_voltar+5;
+  retorna_ao_menu.Top := high_voltar + 5;
 end;
 
 procedure Tpag_cadastro.retorna_menuClick(Sender: TObject);
 begin
- pag_home.MostrarFormularioEmbed(pag_inicial);
+  pag_home.MostrarFormularioEmbed(pag_inicial);
 end;
 
 end.

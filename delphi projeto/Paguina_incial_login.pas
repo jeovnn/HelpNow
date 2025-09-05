@@ -3,9 +3,10 @@ unit Paguina_incial_login;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls,
-  Vcl.Imaging.jpeg, Vcl.Imaging.pngimage;
+  Vcl.Imaging.jpeg, Vcl.Imaging.pngimage, Vcl.Mask;
 
 type
   Tpag_inicial = class(TForm)
@@ -14,7 +15,6 @@ type
     text_login_inicial: TLabel;
     botao_cadastro: TImage;
     descricao: TLabel;
-    Image1: TImage;
     procedure botao_loginMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure botao_loginMouseUp(Sender: TObject; Button: TMouseButton;
@@ -34,8 +34,8 @@ type
 
 var
   pag_inicial: Tpag_inicial;
-  high_login : Integer;
-  high_cadastro : Integer;
+  high_login: Integer;
+  high_cadastro: Integer;
 
 implementation
 
@@ -44,18 +44,17 @@ uses
 
 {$R *.dfm}
 
-
-//faz o botao de cadastro mudar de tamanho no click
+// faz o botao de cadastro mudar de tamanho no click
 procedure Tpag_inicial.botao_cadastroMouseDown(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
-      botao_cadastro.Top := high_cadastro+10;
+  botao_cadastro.Top := high_cadastro + 10;
 end;
 
 procedure Tpag_inicial.botao_cadastroMouseUp(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
-      botao_cadastro.Top := high_cadastro;
+  botao_cadastro.Top := high_cadastro;
 end;
 
 procedure Tpag_inicial.botao_loginClick(Sender: TObject);
@@ -68,17 +67,17 @@ begin
   pag_home.MostrarFormularioEmbed(pag_cadastro);
 end;
 
-//faz o botao de login mudar de tamanho no click
-procedure Tpag_inicial.botao_loginMouseDown(Sender: TObject; Button: TMouseButton;
-  Shift: TShiftState; X, Y: Integer);
+// faz o botao de login mudar de tamanho no click
+procedure Tpag_inicial.botao_loginMouseDown(Sender: TObject;
+  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
-        botao_login.Top := high_login+10;
+  botao_login.Top := high_login + 10;
 end;
 
 procedure Tpag_inicial.botao_loginMouseUp(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 begin
-        botao_login.Top := high_login;
+  botao_login.Top := high_login;
 end;
 
 procedure Tpag_inicial.FormCreate(Sender: TObject);

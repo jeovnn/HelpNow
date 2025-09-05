@@ -1,6 +1,6 @@
 object DataModule2: TDataModule2
-  Height = 480
-  Width = 640
+  Height = 537
+  Width = 728
   object FDConnection1: TFDConnection
     Params.Strings = (
       'User_Name=sysdba'

@@ -20,7 +20,7 @@ type
     label_email: TLabel;
     email_cad: TEdit;
     painel_senha_confirmação: TPanel;
-    senha_conf_cad: TEdit;
+    cpf: TEdit;
     painel_nome: TPanel;
     imagem_nome: TImage;
     label_nome: TLabel;
@@ -50,6 +50,7 @@ type
     procedure FormCreate(Sender: TObject);
     procedure Label2MouseEnter(Sender: TObject);
     procedure Label2MouseLeave(Sender: TObject);
+    procedure Label4Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -64,7 +65,7 @@ var
 implementation
 
 uses
-  pg_home, Paguina_incial_login, Paguina_login;
+  pg_home, Paguina_incial_login, Paguina_login, Paguina_servicos;
 
 {$R *.dfm}
 
@@ -81,13 +82,98 @@ end;
 
 procedure Tpag_cadastro.Label2MouseEnter(Sender: TObject);
 begin
-Label2.Enabled:=false;
+  Label2.Enabled := false;
 end;
 
 procedure Tpag_cadastro.Label2MouseLeave(Sender: TObject);
 begin
-Label2.Enabled:=true;
+  Label2.Enabled := true;
 end;
+
+procedure Tpag_cadastro.Label4Click(Sender: TObject);
+var
+  NovoIDUsuario, NovoIDConta: Integer;
+begin
+  if Trim(email_cad.Text) = '' then
+  begin
+    ShowMessage('Digite seu e-mail.');
+    Exit;
+  end;
+
+  if Trim(nome_cad.Text) = '' then
+  begin
+    ShowMessage('Digite seu nome.');
+    Exit;
+  end;
+
+  if Trim(cpf.Text) = '' then
+  begin
+    ShowMessage('Digite seu telefone ou CPF.');
+    Exit;
+  end;
+
+  if Trim(senha_cad.Text) = '' then
+  begin
+    ShowMessage('Digite sua senha.');
+    Exit;
+  end;
+
+  try
+    // 1) Gerar o próximo id_usuario manualmente
+    with DataModule2.FDQuery1 do
+    begin
+      SQL.Text := 'SELECT COALESCE(MAX(id_usuario), 0) + 1 AS prox FROM usuario';
+      Open;
+      NovoIDUsuario := FieldByName('prox').AsInteger;
+      Close;
+    end;
+
+    // 2) Inserir na tabela usuario   //esse : é tipo pra deixar reservado um espaço pra colocar o dado durante a execução
+    with DataModule2.FDQuery1 do
+    begin
+      SQL.Text :=
+        'INSERT INTO usuario (id_usuario, email, nome, telefone, data_cadastro) ' +
+        'VALUES (:id, :email, :nome, :telefone, :data_cadastro)';
+      ParamByName('id').AsInteger         := NovoIDUsuario;
+      ParamByName('email').AsString       := email_cad.Text;
+      ParamByName('nome').AsString        := nome_cad.Text;
+      ParamByName('telefone').AsString    := cpf.Text;
+      ParamByName('data_cadastro').AsDate := Date;
+      ExecSQL;
+    end;
+
+    // 3) Gerar o próximo id_conta manualmente
+    with DataModule2.FDQuery1 do
+    begin
+      SQL.Text := 'SELECT COALESCE(MAX(id_conta), 0) + 1 AS prox FROM conta';
+      Open;
+      NovoIDConta := FieldByName('prox').AsInteger;
+      Close;
+    end;
+
+    // 4) Inserir na tabela conta
+    with DataModule2.FDQuery1 do
+    begin
+      SQL.Text :=
+        'INSERT INTO conta (id_conta, id_usuario, usuario, senha, tipo) ' +
+        'VALUES (:id_conta, :id_usuario, :usuario, :senha, :tipo)';
+      ParamByName('id_conta').AsInteger   := NovoIDConta;
+      ParamByName('id_usuario').AsInteger := NovoIDUsuario;
+      ParamByName('usuario').AsString     := email_cad.Text;
+      ParamByName('senha').AsString       := senha_cad.Text;
+      ParamByName('tipo').AsString        := 'cliente';
+      ExecSQL;
+    end;
+
+    ShowMessage('Cadastro realizado com sucesso!');
+    pag_home.MostrarFormularioEmbed(Form2);
+
+  except
+    on E: Exception do
+      ShowMessage('Erro ao cadastrar: ' + E.Message);
+  end;
+end;
+
 
 procedure Tpag_cadastro.retorna_ao_menuClick(Sender: TObject);
 begin
@@ -105,7 +191,7 @@ procedure Tpag_cadastro.retorna_ao_menuMouseUp(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
   retorna_ao_menu.Top := high_voltar + 5;
-  Label2.Top := high_volt_txt +5;
+  Label2.Top := high_volt_txt + 5;
 end;
 
 procedure Tpag_cadastro.retorna_menuClick(Sender: TObject);

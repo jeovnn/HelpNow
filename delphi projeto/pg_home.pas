@@ -12,7 +12,7 @@ uses
   FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.FB,
   FireDAC.VCLUI.Wait, FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf,
   FireDAC.DApt, Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client,
-  FireDAC.Phys.IBBase;
+  FireDAC.Phys.IBBase,paguina_perfil;
 
 type
   Tpag_home = class(TForm)
@@ -37,10 +37,12 @@ begin
   pag_inicial := Tpag_inicial.Create(Self);
   pag_login := Tpag_login.Create(Self);
   pag_cadastro := Tpag_cadastro.Create(Self);
+  Form3 := TForm3.Create(Self);
 
   pag_inicial.Visible := False;
   pag_login.Visible := False;
   pag_cadastro.Visible := False;
+  Form3.Visible := False;
 
   MostrarFormularioEmbed(pag_inicial);
 end;
@@ -54,6 +56,9 @@ begin
     pag_login.Visible := False;
   if Assigned(pag_cadastro) then
     pag_cadastro.Visible := False;
+  if Assigned(Form3) then
+    Form3.Visible := False;
+
 
   // Embed the requested form
   AForm.Parent := Panel1;

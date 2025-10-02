@@ -6,8 +6,11 @@ uses
   Paguina_login in 'Paguina_login.pas' {pag_login},
   Paguina_cadastro in 'Paguina_cadastro.pas' {pag_cadastro},
   pg_home in 'pg_home.pas' {pag_home},
-  Conexao in 'Conexao.pas' {DataModule2: TDataModule};
-  //Perfil in 'Perfil.pas' {Form2};
+  Conexao in 'Conexao.pas' {DataModule2: TDataModule},
+  Paguina_servicos in 'Paguina_servicos.pas' {Form2},
+  paguina_perfil in 'paguina_perfil.pas' {Form3};
+
+//Perfil in 'Perfil.pas' {Form2};
 
 {$R *.res}
 
@@ -19,6 +22,8 @@ begin
   Application.CreateForm(Tpag_login, pag_login);
   Application.CreateForm(Tpag_cadastro, pag_cadastro);
   Application.CreateForm(TDataModule2, DataModule2);
+  Application.CreateForm(TForm2, Form2);
+  Application.CreateForm(TForm3, Form3);
   //Application.CreateForm(TForm2, Form2);
   Application.Run;
 end.

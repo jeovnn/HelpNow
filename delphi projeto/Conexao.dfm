@@ -8,20 +8,20 @@ object DataModule2: TDataModule2
       'Database=C:\Users\jeova\Bancos\WELPNOW.FDB'
       'DriverID=FB')
     Left = 128
-    Top = 64
+    Top = 40
   end
   object FDPhysFBDriverLink1: TFDPhysFBDriverLink
-    Left = 120
-    Top = 176
+    Left = 128
+    Top = 120
   end
   object DataSource1: TDataSource
     DataSet = FDQuery1
     Left = 352
-    Top = 64
+    Top = 40
   end
   object FDQuery1: TFDQuery
     Connection = FDConnection1
     Left = 248
-    Top = 64
+    Top = 40
   end
 end

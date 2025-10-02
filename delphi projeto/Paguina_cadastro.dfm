@@ -23,8 +23,6 @@
     Color = clBrown
     ParentBackground = False
     TabOrder = 0
-    ExplicitLeft = 8
-    ExplicitTop = -8
     object text_login_pag: TLabel
       Left = 408
       Top = 118
@@ -851,6 +849,7 @@
       Font.Style = [fsBold]
       ParentFont = False
       Layout = tlCenter
+      OnClick = Label4Click
     end
     object Image2: TImage
       Left = 392
@@ -4562,7 +4561,6 @@
         Font.Style = [fsBold]
         ParentFont = False
         Layout = tlCenter
-        ExplicitLeft = 7
         ExplicitHeight = 23
       end
       object email_cad: TEdit
@@ -4579,7 +4577,6 @@
         Alignment = taCenter
         Color = clMaroon
         TabOrder = 0
-        ExplicitLeft = 122
         ExplicitHeight = 23
       end
     end
@@ -5065,7 +5062,6 @@
         Font.Style = [fsBold]
         ParentFont = False
         Layout = tlCenter
-        ExplicitLeft = 7
         ExplicitHeight = 23
       end
       object nome_cad: TEdit
@@ -5082,7 +5078,7 @@
         Alignment = taCenter
         Color = clMaroon
         TabOrder = 0
-        ExplicitLeft = 113
+        ExplicitHeight = 23
       end
     end
     object painel_senha: TPanel
@@ -5569,7 +5565,6 @@
         Font.Style = [fsBold]
         ParentFont = False
         Layout = tlCenter
-        ExplicitLeft = 7
         ExplicitHeight = 23
       end
       object senha_cad: TEdit
@@ -5586,7 +5581,6 @@
         Alignment = taCenter
         Color = clMaroon
         TabOrder = 0
-        ExplicitLeft = 122
         ExplicitHeight = 23
       end
     end
@@ -6076,10 +6070,9 @@
         Font.Style = [fsBold]
         ParentFont = False
         Layout = tlCenter
-        ExplicitLeft = 13
         ExplicitHeight = 23
       end
-      object senha_conf_cad: TEdit
+      object cpf: TEdit
         AlignWithMargins = True
         Left = 110
         Top = 8
@@ -6092,7 +6085,6 @@
         Alignment = taCenter
         Color = clMaroon
         TabOrder = 0
-        ExplicitLeft = 122
         ExplicitHeight = 23
       end
     end

@@ -3,9 +3,10 @@ unit Paguina_cadastro;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls,
-  Vcl.Imaging.pngimage, Vcl.Imaging.jpeg;
+  Vcl.Imaging.pngimage, Vcl.Imaging.jpeg, conexao;
 
 type
   Tpag_cadastro = class(TForm)
@@ -29,15 +30,26 @@ type
     label_senha1: TLabel;
     senha_cad: TEdit;
     imagem_cong_senha: TImage;
-    labal_senha_conf: TLabel;
     email_direção: TLabel;
     nome_direção: TLabel;
     senha_conf_direção: TLabel;
     senha_direção: TLabel;
-    retorna_menu: TImage;
+    retorna_ao_menu: TImage;
+    Image1: TImage;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label4: TLabel;
     Image2: TImage;
     procedure goto_cadastroClick(Sender: TObject);
     procedure retorna_menuClick(Sender: TObject);
+    procedure retorna_ao_menuClick(Sender: TObject);
+    procedure retorna_ao_menuMouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure retorna_ao_menuMouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure FormCreate(Sender: TObject);
+    procedure Label2MouseEnter(Sender: TObject);
+    procedure Label2MouseLeave(Sender: TObject);
   private
     { Private declarations }
   public
@@ -46,6 +58,8 @@ type
 
 var
   pag_cadastro: Tpag_cadastro;
+  high_voltar: Integer;
+  high_volt_txt: Integer;
 
 implementation
 
@@ -54,14 +68,49 @@ uses
 
 {$R *.dfm}
 
+procedure Tpag_cadastro.FormCreate(Sender: TObject);
+begin
+  high_voltar := retorna_ao_menu.Top;
+  high_volt_txt := Label2.Top;
+end;
+
 procedure Tpag_cadastro.goto_cadastroClick(Sender: TObject);
 begin
- pag_home.MostrarFormularioEmbed(pag_login);
+  pag_home.MostrarFormularioEmbed(pag_login);
+end;
+
+procedure Tpag_cadastro.Label2MouseEnter(Sender: TObject);
+begin
+Label2.Enabled:=false;
+end;
+
+procedure Tpag_cadastro.Label2MouseLeave(Sender: TObject);
+begin
+Label2.Enabled:=true;
+end;
+
+procedure Tpag_cadastro.retorna_ao_menuClick(Sender: TObject);
+begin
+  pag_home.MostrarFormularioEmbed(pag_inicial);
+end;
+
+procedure Tpag_cadastro.retorna_ao_menuMouseDown(Sender: TObject;
+  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+  retorna_ao_menu.Top := high_voltar;
+  Label2.Top := high_volt_txt;
+end;
+
+procedure Tpag_cadastro.retorna_ao_menuMouseUp(Sender: TObject;
+  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+  retorna_ao_menu.Top := high_voltar + 5;
+  Label2.Top := high_volt_txt +5;
 end;
 
 procedure Tpag_cadastro.retorna_menuClick(Sender: TObject);
 begin
- pag_home.MostrarFormularioEmbed(pag_inicial);
+  pag_home.MostrarFormularioEmbed(pag_inicial);
 end;
 
 end.

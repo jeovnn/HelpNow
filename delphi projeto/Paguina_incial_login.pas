@@ -3,9 +3,10 @@ unit Paguina_incial_login;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls,
-  Vcl.Imaging.jpeg, Vcl.Imaging.pngimage;
+  Vcl.Imaging.jpeg, Vcl.Imaging.pngimage, Vcl.Mask;
 
 type
   Tpag_inicial = class(TForm)
@@ -14,6 +15,8 @@ type
     text_login_inicial: TLabel;
     botao_cadastro: TImage;
     descricao: TLabel;
+    Cadstro_txt: TLabel;
+    Login_txt: TLabel;
     Image1: TImage;
     procedure botao_loginMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
@@ -25,6 +28,11 @@ type
       Shift: TShiftState; X, Y: Integer);
     procedure botao_cadastroMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
+    procedure FormCreate(Sender: TObject);
+    procedure Cadstro_txtMouseEnter(Sender: TObject);
+    procedure Cadstro_txtMouseLeave(Sender: TObject);
+    procedure Login_txtMouseEnter(Sender: TObject);
+    procedure Login_txtMouseLeave(Sender: TObject);
   private
     { Private declarations }
   public
@@ -33,6 +41,10 @@ type
 
 var
   pag_inicial: Tpag_inicial;
+  high_login: Integer;
+  high_cadastro: Integer;
+  high_label: Integer;
+  high_label2: Integer;
 
 implementation
 
@@ -41,24 +53,19 @@ uses
 
 {$R *.dfm}
 
-
-//faz o botao de cadastro mudar de tamanho no click
+// faz o botao de cadastro mudar de tamanho no click
 procedure Tpag_inicial.botao_cadastroMouseDown(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
-botao_login.Height := 71;
-botao_login.Width := 280;
-botao_login.top := 344;
-botao_login.left := 70;
+  botao_cadastro.Top := high_cadastro + 10;
+  Cadstro_txt.Top:= high_label+10;
 end;
 
 procedure Tpag_inicial.botao_cadastroMouseUp(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
-botao_login.Height := 81;
-botao_login.Width := 300;
-botao_login.top := 339;
-botao_login.left := 60;
+  botao_cadastro.Top := high_cadastro;
+  Cadstro_txt.Top:= high_label;
 end;
 
 procedure Tpag_inicial.botao_loginClick(Sender: TObject);
@@ -71,17 +78,50 @@ begin
   pag_home.MostrarFormularioEmbed(pag_cadastro);
 end;
 
-//faz o botao de login mudar de tamanho no click
-procedure Tpag_inicial.botao_loginMouseDown(Sender: TObject; Button: TMouseButton;
-  Shift: TShiftState; X, Y: Integer);
+// faz o botao de login mudar de tamanho no click
+procedure Tpag_inicial.botao_loginMouseDown(Sender: TObject;
+  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
-//temp
+  botao_login.Top := high_login + 10;
+  Login_txt.Top := high_label2 + 10;
 end;
+
 
 procedure Tpag_inicial.botao_loginMouseUp(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 begin
-//temp
+  botao_login.Top := high_login;
+  Login_txt.Top := high_label2;
+end;
+
+procedure Tpag_inicial.FormCreate(Sender: TObject);
+begin
+  high_login := botao_login.Top;
+  high_cadastro := botao_cadastro.Top;
+  high_label := Cadstro_txt.Top;
+  high_label2:= Login_txt.Top;
+end;
+
+procedure Tpag_inicial.Login_txtMouseEnter(Sender: TObject);
+begin
+    Login_txt.Enabled:=false;
+end;
+
+
+procedure Tpag_inicial.Login_txtMouseLeave(Sender: TObject);
+begin
+    Login_txt.Enabled:=true;
+end;
+
+
+procedure Tpag_inicial.Cadstro_txtMouseEnter(Sender: TObject);
+begin
+  Cadstro_txt.Enabled:=false;
+end;
+
+procedure Tpag_inicial.Cadstro_txtMouseLeave(Sender: TObject);
+begin
+  Cadstro_txt.Enabled:=true;
 end;
 
 end.

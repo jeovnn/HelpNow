@@ -2,20 +2,26 @@
 <BorlandProject>
 	<Transactions>
     <Transaction>2025/08/14 19:11:15.000.679,=C:\Users\arthu\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
-    <Transaction>2025/08/14 19:14:22.000.855,C:\Users\arthu\Documents\delphi\trabalho conehcimento aplicado\unidade_1.dfm=C:\Users\arthu\Documents\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
-    <Transaction>2025/08/14 19:14:22.000.855,C:\Users\arthu\Documents\delphi\trabalho conehcimento aplicado\unidade_1.pas=C:\Users\arthu\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
-    <Transaction>2025/08/14 19:16:19.000.326,C:\Users\arthu\Documents\delphi\trabalho conehcimento aplicado\Paguina_incial_login.pas=C:\Users\arthu\Documents\delphi\trabalho conehcimento aplicado\unidade_1.pas</Transaction>
-    <Transaction>2025/08/14 19:16:19.000.326,C:\Users\arthu\Documents\delphi\trabalho conehcimento aplicado\Paguina_incial_login.dfm=C:\Users\arthu\Documents\delphi\trabalho conehcimento aplicado\unidade_1.dfm</Transaction>
+    <Transaction>2025/08/14 19:14:22.000.855,C:\Users\arthu\Documents\Embarcadero\Studio\Projects\Unit1.pas=C:\Users\arthu\Documents\delphi\trabalho conehcimento aplicado\unidade_1.pas</Transaction>
+    <Transaction>2025/08/14 19:14:22.000.855,C:\Users\arthu\Documents\Embarcadero\Studio\Projects\Unit1.dfm=C:\Users\arthu\Documents\delphi\trabalho conehcimento aplicado\unidade_1.dfm</Transaction>
+    <Transaction>2025/08/14 19:16:19.000.326,C:\Users\arthu\Documents\delphi\trabalho conehcimento aplicado\unidade_1.pas=C:\Users\arthu\Documents\delphi\trabalho conehcimento aplicado\Paguina_incial_login.pas</Transaction>
+    <Transaction>2025/08/14 19:16:19.000.326,C:\Users\arthu\Documents\delphi\trabalho conehcimento aplicado\unidade_1.dfm=C:\Users\arthu\Documents\delphi\trabalho conehcimento aplicado\Paguina_incial_login.dfm</Transaction>
     <Transaction>2025/08/14 19:50:56.000.715,=C:\Users\arthu\Documents\Embarcadero\Studio\Projects\Unit2.pas</Transaction>
-    <Transaction>2025/08/14 19:51:12.000.743,C:\Users\arthu\Documents\delphi\trabalho conehcimento aplicado\Paguina_login.pas=C:\Users\arthu\Documents\Embarcadero\Studio\Projects\Unit2.pas</Transaction>
-    <Transaction>2025/08/14 19:51:12.000.743,C:\Users\arthu\Documents\delphi\trabalho conehcimento aplicado\Paguina_login.dfm=C:\Users\arthu\Documents\Embarcadero\Studio\Projects\Unit2.dfm</Transaction>
+    <Transaction>2025/08/14 19:51:12.000.743,C:\Users\arthu\Documents\Embarcadero\Studio\Projects\Unit2.dfm=C:\Users\arthu\Documents\delphi\trabalho conehcimento aplicado\Paguina_login.dfm</Transaction>
+    <Transaction>2025/08/14 19:51:12.000.743,C:\Users\arthu\Documents\Embarcadero\Studio\Projects\Unit2.pas=C:\Users\arthu\Documents\delphi\trabalho conehcimento aplicado\Paguina_login.pas</Transaction>
     <Transaction>2025/08/14 20:13:30.000.948,=C:\Users\arthu\Documents\Embarcadero\Studio\Projects\Unit3.pas</Transaction>
-    <Transaction>2025/08/14 20:13:44.000.172,C:\Users\arthu\Documents\delphi\trabalho conehcimento aplicado\Paguina_cadastro.dfm=C:\Users\arthu\Documents\Embarcadero\Studio\Projects\Unit3.dfm</Transaction>
-    <Transaction>2025/08/14 20:13:44.000.172,C:\Users\arthu\Documents\delphi\trabalho conehcimento aplicado\Paguina_cadastro.pas=C:\Users\arthu\Documents\Embarcadero\Studio\Projects\Unit3.pas</Transaction>
+    <Transaction>2025/08/14 20:13:44.000.172,C:\Users\arthu\Documents\Embarcadero\Studio\Projects\Unit3.pas=C:\Users\arthu\Documents\delphi\trabalho conehcimento aplicado\Paguina_cadastro.pas</Transaction>
+    <Transaction>2025/08/14 20:13:44.000.172,C:\Users\arthu\Documents\Embarcadero\Studio\Projects\Unit3.dfm=C:\Users\arthu\Documents\delphi\trabalho conehcimento aplicado\Paguina_cadastro.dfm</Transaction>
     <Transaction>2025/08/14 21:15:02.000.687,=C:\Users\arthu\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
-    <Transaction>2025/08/14 21:15:13.000.542,C:\Users\arthu\Documents\delphi\trabalho conehcimento aplicado\pg_home.pas=C:\Users\arthu\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
-    <Transaction>2025/08/14 21:15:13.000.542,C:\Users\arthu\Documents\delphi\trabalho conehcimento aplicado\pg_home.dfm=C:\Users\arthu\Documents\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
-    <Transaction>2025/08/14 21:23:16.000.112,C:\Users\arthu\Documents\delphi\trabalho conehcimento aplicado\HelpNow.dproj=C:\Users\arthu\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>2025/08/14 21:15:13.000.542,C:\Users\arthu\Documents\Embarcadero\Studio\Projects\Unit1.pas=C:\Users\arthu\Documents\delphi\trabalho conehcimento aplicado\pg_home.pas</Transaction>
+    <Transaction>2025/08/14 21:15:13.000.542,C:\Users\arthu\Documents\Embarcadero\Studio\Projects\Unit1.dfm=C:\Users\arthu\Documents\delphi\trabalho conehcimento aplicado\pg_home.dfm</Transaction>
+    <Transaction>2025/08/14 21:23:16.000.112,C:\Users\arthu\Documents\Embarcadero\Studio\Projects\Project1.dproj=C:\Users\arthu\Documents\delphi\trabalho conehcimento aplicado\HelpNow.dproj</Transaction>
+    <Transaction>2025/08/28 21:17:36.000.187,=C:\Users\jeova\OneDrive\Área de Trabalho\Programação\Projeto HelpNow\HelpNow\delphi projeto\Unit2.pas</Transaction>
+    <Transaction>2025/08/28 21:19:58.000.115,C:\Users\jeova\OneDrive\Área de Trabalho\Programação\Projeto HelpNow\HelpNow\delphi projeto\Unit2.dfm=C:\Users\jeova\OneDrive\Área de Trabalho\Programação\Projeto HelpNow\HelpNow\delphi projeto\Conexao.dfm</Transaction>
+    <Transaction>2025/08/28 21:19:58.000.115,C:\Users\jeova\OneDrive\Área de Trabalho\Programação\Projeto HelpNow\HelpNow\delphi projeto\Unit2.pas=C:\Users\jeova\OneDrive\Área de Trabalho\Programação\Projeto HelpNow\HelpNow\delphi projeto\Conexao.pas</Transaction>
+    <Transaction>2025/09/04 19:47:03.000.900,=C:\Users\jeova\OneDrive\Área de Trabalho\Programação\Projeto HelpNow\HelpNow\delphi projeto\Unit2.pas</Transaction>
+    <Transaction>2025/09/04 20:12:59.000.585,C:\Users\jeova\OneDrive\Área de Trabalho\Programação\Projeto HelpNow\HelpNow\delphi projeto\Unit2.dfm=C:\Users\jeova\OneDrive\Área de Trabalho\Programação\Projeto HelpNow\HelpNow\delphi projeto\Perfil.dfm</Transaction>
+    <Transaction>2025/09/04 20:12:59.000.585,C:\Users\jeova\OneDrive\Área de Trabalho\Programação\Projeto HelpNow\HelpNow\delphi projeto\Unit2.pas=C:\Users\jeova\OneDrive\Área de Trabalho\Programação\Projeto HelpNow\HelpNow\delphi projeto\Perfil.pas</Transaction>
   </Transactions>
 	<ProjectSortOrder AutoSort="0" SortType="0">
     <File Path="Paguina_incial_login.pas"/>
@@ -26,5 +32,8 @@
     <File Path="Paguina_cadastro.dfm"/>
     <File Path="pg_home.pas"/>
     <File Path="pg_home.dfm"/>
+    <File Path="Conexao.pas"/>
+    <File Path="Conexao.dfm"/>
+    <File Path="Perfil.pas"/>
   </ProjectSortOrder>
 </BorlandProject>

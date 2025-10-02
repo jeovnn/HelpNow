@@ -3,7 +3,8 @@ unit Paguina_login;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls,
   Vcl.Imaging.pngimage, Vcl.Imaging.jpeg;
 
@@ -23,9 +24,19 @@ type
     label_naoconta: TLabel;
     goto_cadastro: TLabel;
     retorna_ao_menu: TImage;
+    Enviar: TImage;
     Image1: TImage;
+    Votlar_txt: TLabel;
+    Label1: TLabel;
     procedure goto_cadastroClick(Sender: TObject);
     procedure retorna_ao_menuClick(Sender: TObject);
+    procedure retorna_ao_menuMouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure retorna_ao_menuMouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure FormCreate(Sender: TObject);
+    procedure Votlar_txtMouseEnter(Sender: TObject);
+    procedure Votlar_txtMouseLeave(Sender: TObject);
   private
     { Private declarations }
   public
@@ -34,6 +45,8 @@ type
 
 var
   pag_login: Tpag_login;
+  high_voltar: Integer;
+  high_voltar_txt: Integer;
 
 implementation
 
@@ -42,14 +55,42 @@ uses
 
 {$R *.dfm}
 
+procedure Tpag_login.FormCreate(Sender: TObject);
+begin
+  high_voltar := retorna_ao_menu.Top;
+  high_voltar_txt:= Votlar_txt.Top;
+end;
+
 procedure Tpag_login.goto_cadastroClick(Sender: TObject);
 begin
- pag_home.MostrarFormularioEmbed(pag_cadastro);
+  pag_home.MostrarFormularioEmbed(pag_cadastro);
+end;
+
+procedure Tpag_login.Votlar_txtMouseEnter(Sender: TObject);
+begin
+Votlar_txt.Enabled:=false
+end;
+
+procedure Tpag_login.Votlar_txtMouseLeave(Sender: TObject);
+begin
+ Votlar_txt.Enabled:=true
 end;
 
 procedure Tpag_login.retorna_ao_menuClick(Sender: TObject);
 begin
- pag_home.MostrarFormularioEmbed(pag_inicial);
+  pag_home.MostrarFormularioEmbed(pag_inicial);
+end;
+
+procedure Tpag_login.retorna_ao_menuMouseDown(Sender: TObject;
+  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+  retorna_ao_menu.Top := high_voltar + 5;
+end;
+
+procedure Tpag_login.retorna_ao_menuMouseUp(Sender: TObject;
+  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+  retorna_ao_menu.Top := high_voltar;
 end;
 
 end.

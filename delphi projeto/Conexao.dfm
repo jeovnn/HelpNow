@@ -5,7 +5,7 @@ object DataModule2: TDataModule2
     Params.Strings = (
       'User_Name=sysdba'
       'Password=masterkey'
-      'Database=C:\Users\jeova\Bancos\WELPNOW.FDB'
+      'Database=C:\Users\jeova\Bancos\WELPNOW3.FDB'
       'DriverID=FB')
     Left = 128
     Top = 40

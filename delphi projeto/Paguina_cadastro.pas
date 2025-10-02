@@ -108,7 +108,7 @@ begin
 
   if Trim(cpf.Text) = '' then
   begin
-    ShowMessage('Digite seu telefone ou CPF.');
+    ShowMessage('Digite seu CPF.');
     Exit;
   end;
 
@@ -132,12 +132,12 @@ begin
     with DataModule2.FDQuery1 do
     begin
       SQL.Text :=
-        'INSERT INTO usuario (id_usuario, email, nome, telefone, data_cadastro) ' +
-        'VALUES (:id, :email, :nome, :telefone, :data_cadastro)';
+        'INSERT INTO usuario (id_usuario, email, nome, cpf, data_cadastro) ' +
+        'VALUES (:id, :email, :nome, :cpf, :data_cadastro)';
       ParamByName('id').AsInteger         := NovoIDUsuario;
       ParamByName('email').AsString       := email_cad.Text;
       ParamByName('nome').AsString        := nome_cad.Text;
-      ParamByName('telefone').AsString    := cpf.Text;
+      ParamByName('cpf').AsString    := cpf.Text;
       ParamByName('data_cadastro').AsDate := Date;
       ExecSQL;
     end;
@@ -149,6 +149,7 @@ begin
       Open;
       NovoIDConta := FieldByName('prox').AsInteger;
       Close;
+      UsuarioLogadoID := NovoIDUsuario;
     end;
 
     // 4) Inserir na tabela conta

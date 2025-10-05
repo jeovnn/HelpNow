@@ -33,6 +33,7 @@ type
     procedure Cadstro_txtMouseLeave(Sender: TObject);
     procedure Login_txtMouseEnter(Sender: TObject);
     procedure Login_txtMouseLeave(Sender: TObject);
+    procedure Login_txtClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -100,6 +101,11 @@ begin
   high_cadastro := botao_cadastro.Top;
   high_label := Cadstro_txt.Top;
   high_label2:= Login_txt.Top;
+end;
+
+procedure Tpag_inicial.Login_txtClick(Sender: TObject);
+begin
+pag_home.MostrarFormularioEmbed(pag_login);
 end;
 
 procedure Tpag_inicial.Login_txtMouseEnter(Sender: TObject);

@@ -24,8 +24,8 @@
     ParentBackground = False
     TabOrder = 0
     object text_login_pag: TLabel
-      Left = 408
-      Top = 118
+      Left = 512
+      Top = 110
       Width = 312
       Height = 31
       Alignment = taCenter
@@ -39,14 +39,14 @@
     end
     object descricao: TLabel
       AlignWithMargins = True
-      Left = 424
-      Top = 155
+      Left = 24
+      Top = 132
       Width = 285
       Height = 42
       Alignment = taCenter
       Caption = 
-        'Bem Vindo a HelpNow'#13#10'Insira seus dados para podermos continuar'#13#10 +
-        'com o seu cadastro e registrar sua conta.'
+        #10'Insira seus dados para podermos continuar'#13#10'com o seu cadastro e' +
+        ' registrar sua conta.'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clHighlightText
       Font.Height = -12
@@ -87,6 +87,12 @@
       Width = 178
       Height = 15
       Caption = 'Insira aqui o seu email para log-in'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentFont = False
     end
     object nome_direção: TLabel
       Left = 13
@@ -94,6 +100,14 @@
       Width = 180
       Height = 15
       Caption = 'Insira aqui o seu nome para log-in'
+      Color = clBrown
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentColor = False
+      ParentFont = False
     end
     object senha_conf_direção: TLabel
       Left = 13
@@ -101,6 +115,14 @@
       Width = 202
       Height = 15
       Caption = 'Confirme aqui o sua senha para log-in'
+      Color = clBrown
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentColor = False
+      ParentFont = False
     end
     object senha_direção: TLabel
       Left = 13
@@ -108,6 +130,14 @@
       Width = 180
       Height = 15
       Caption = 'Insira aqui o sua senha para log-in'
+      Color = clBrown
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentColor = False
+      ParentFont = False
     end
     object retorna_ao_menu: TImage
       Left = 5
@@ -852,8 +882,8 @@
       OnClick = Label4Click
     end
     object Image2: TImage
-      Left = 392
-      Top = 143
+      Left = 488
+      Top = 154
       Width = 361
       Height = 339
       Picture.Data = {
@@ -4576,6 +4606,12 @@
         Align = alRight
         Alignment = taCenter
         Color = clMaroon
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -12
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
         TabOrder = 0
         ExplicitHeight = 23
       end
@@ -5077,6 +5113,12 @@
         Align = alRight
         Alignment = taCenter
         Color = clMaroon
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -12
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
         TabOrder = 0
         ExplicitHeight = 23
       end
@@ -5580,6 +5622,13 @@
         Align = alRight
         Alignment = taCenter
         Color = clMaroon
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -12
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+        PasswordChar = '*'
         TabOrder = 0
         ExplicitHeight = 23
       end
@@ -6084,6 +6133,12 @@
         Align = alRight
         Alignment = taCenter
         Color = clMaroon
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -12
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
         TabOrder = 0
         ExplicitHeight = 23
       end

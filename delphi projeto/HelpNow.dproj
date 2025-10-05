@@ -152,6 +152,18 @@
             <Form>Form3</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="TornarPrestador.pas">
+            <Form>Form4</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="EditarInformacoes.pas">
+            <Form>Form5</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="EditarFornecedor.pas">
+            <Form>Form6</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

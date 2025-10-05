@@ -8,7 +8,10 @@ uses
   pg_home in 'pg_home.pas' {pag_home},
   Conexao in 'Conexao.pas' {DataModule2: TDataModule},
   Paguina_servicos in 'Paguina_servicos.pas' {Form2},
-  paguina_perfil in 'paguina_perfil.pas' {Form3};
+  paguina_perfil in 'paguina_perfil.pas' {Form3},
+  TornarPrestador in 'TornarPrestador.pas' {Form4},
+  EditarInformacoes in 'EditarInformacoes.pas' {Form5},
+  EditarFornecedor in 'EditarFornecedor.pas' {Form6};
 
 //Perfil in 'Perfil.pas' {Form2};
 
@@ -24,6 +27,9 @@ begin
   Application.CreateForm(TDataModule2, DataModule2);
   Application.CreateForm(TForm2, Form2);
   Application.CreateForm(TForm3, Form3);
+  Application.CreateForm(TForm4, FormPrestador);
+  Application.CreateForm(TForm5, Form5);
+  Application.CreateForm(TForm6, Form6);
   //Application.CreateForm(TForm2, Form2);
   Application.Run;
 end.

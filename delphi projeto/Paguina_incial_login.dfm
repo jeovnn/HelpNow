@@ -796,6 +796,7 @@ object pag_inicial: Tpag_inicial
       Font.Style = [fsBold]
       ParentFont = False
       Layout = tlCenter
+      OnClick = Login_txtClick
       OnMouseEnter = Login_txtMouseEnter
       OnMouseLeave = Login_txtMouseLeave
     end

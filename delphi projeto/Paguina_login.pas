@@ -27,7 +27,7 @@ type
     Enviar: TImage;
     Image1: TImage;
     Votlar_txt: TLabel;
-    Label1: TLabel;
+    LabelEnviar: TLabel;
     procedure goto_cadastroClick(Sender: TObject);
     procedure retorna_ao_menuClick(Sender: TObject);
     procedure retorna_ao_menuMouseUp(Sender: TObject; Button: TMouseButton;
@@ -37,6 +37,7 @@ type
     procedure FormCreate(Sender: TObject);
     procedure Votlar_txtMouseEnter(Sender: TObject);
     procedure Votlar_txtMouseLeave(Sender: TObject);
+    procedure LabelEnviarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -51,7 +52,7 @@ var
 implementation
 
 uses
-  pg_home, Paguina_incial_login, Paguina_cadastro;
+  pg_home, Paguina_incial_login, Paguina_cadastro, Conexao, Paguina_servicos;
 
 {$R *.dfm}
 
@@ -64,6 +65,49 @@ end;
 procedure Tpag_login.goto_cadastroClick(Sender: TObject);
 begin
   pag_home.MostrarFormularioEmbed(pag_cadastro);
+end;
+
+procedure Tpag_login.LabelEnviarClick(Sender: TObject);
+begin
+  if Trim(email_login.Text) = '' then
+  begin
+    ShowMessage('Digite seu e-mail.');
+    Exit;
+  end;
+
+  if Trim(senha_login.Text) = '' then
+  begin
+    ShowMessage('Digite sua senha.');
+    Exit;
+  end;
+
+  try
+    with DataModule2.FDQuery1 do
+    begin
+      Close;
+      SQL.Text :=
+        'SELECT u.id_usuario, u.nome, u.email ' +
+        'FROM usuario u ' +
+        'INNER JOIN conta c ON u.id_usuario = c.id_usuario ' +
+        'WHERE u.email = :email AND c.senha = :senha';
+
+      ParamByName('email').AsString := email_login.Text;
+      ParamByName('senha').AsString := senha_login.Text;
+      Open;
+
+      if not EOF then
+      begin
+        UsuarioLogadoID := FieldByName('id_usuario').AsInteger;
+        ShowMessage('Bem-vindo, ' + FieldByName('nome').AsString + '!');
+        pag_home.MostrarFormularioEmbed(Form2); // vai para a tela de serviços
+      end
+      else
+        ShowMessage('E-mail ou senha inválidos.');
+    end;
+  except
+    on E: Exception do
+      ShowMessage('Erro ao efetuar login: ' + E.Message);
+  end;
 end;
 
 procedure Tpag_login.Votlar_txtMouseEnter(Sender: TObject);

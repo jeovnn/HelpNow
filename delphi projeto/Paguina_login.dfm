@@ -23,11 +23,9 @@ object pag_login: Tpag_login
     Color = clBrown
     ParentBackground = False
     TabOrder = 0
-    ExplicitLeft = 8
-    ExplicitTop = -8
     object text_login_pag: TLabel
-      Left = 422
-      Top = 123
+      Left = 502
+      Top = 115
       Width = 312
       Height = 31
       Alignment = taCenter
@@ -41,8 +39,8 @@ object pag_login: Tpag_login
     end
     object descricao: TLabel
       AlignWithMargins = True
-      Left = 430
-      Top = 176
+      Left = 30
+      Top = 168
       Width = 286
       Height = 28
       Alignment = taCenter
@@ -791,8 +789,8 @@ object pag_login: Tpag_login
       Stretch = True
     end
     object Image1: TImage
-      Left = 382
-      Top = 160
+      Left = 478
+      Top = 152
       Width = 369
       Height = 343
       Picture.Data = {
@@ -4036,7 +4034,7 @@ object pag_login: Tpag_login
       OnMouseEnter = Votlar_txtMouseEnter
       OnMouseLeave = Votlar_txtMouseLeave
     end
-    object Label1: TLabel
+    object LabelEnviar: TLabel
       Left = 242
       Top = 352
       Width = 74
@@ -4051,6 +4049,7 @@ object pag_login: Tpag_login
       Font.Style = [fsBold]
       ParentFont = False
       Layout = tlCenter
+      OnClick = LabelEnviarClick
     end
     object painel_email: TPanel
       Left = 30
@@ -4534,7 +4533,7 @@ object pag_login: Tpag_login
         Font.Style = [fsBold]
         ParentFont = False
         Layout = tlCenter
-        ExplicitLeft = 16
+        ExplicitHeight = 23
       end
       object email_login: TEdit
         AlignWithMargins = True
@@ -4558,7 +4557,6 @@ object pag_login: Tpag_login
         ParentCtl3D = False
         ParentFont = False
         TabOrder = 0
-        ExplicitLeft = 89
       end
     end
     object painel_senha: TPanel
@@ -5047,7 +5045,7 @@ object pag_login: Tpag_login
         Font.Style = [fsBold]
         ParentFont = False
         Layout = tlCenter
-        ExplicitLeft = 1
+        ExplicitHeight = 23
       end
       object senha_login: TEdit
         AlignWithMargins = True
@@ -5070,7 +5068,6 @@ object pag_login: Tpag_login
         ParentFont = False
         PasswordChar = '*'
         TabOrder = 0
-        ExplicitLeft = 89
       end
     end
   end

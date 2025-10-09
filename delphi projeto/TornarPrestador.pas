@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
   System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Imaging.pngimage,
-  Vcl.ExtCtrls, conexao;
+  Vcl.ExtCtrls, conexao, Vcl.Imaging.jpeg;
 
 type
   TForm4 = class(TForm)
@@ -16,11 +16,18 @@ type
     LabelPerguntaHabilidades: TLabel;
     EditRegiao: TEdit;
     LabelPerguntaRegiao: TLabel;
-    ButtonConcluir: TButton;
-    ButtonVoltar: TButton;
     GroupBox1: TGroupBox;
-    procedure ButtonConcluirClick(Sender: TObject);
+    Votlar_txt: TLabel;
+    retorna_ao_menu: TImage;
+    Image5: TImage;
+    Label1: TLabel;
     procedure ButtonVoltarClick(Sender: TObject);
+    procedure retorna_ao_menuClick(Sender: TObject);
+    procedure Image5Click(Sender: TObject);
+    procedure Votlar_txtMouseEnter(Sender: TObject);
+    procedure Votlar_txtMouseLeave(Sender: TObject);
+    procedure Label1MouseLeave(Sender: TObject);
+    procedure Label1MouseEnter(Sender: TObject);
   private
     { Private declarations }
   public
@@ -37,7 +44,14 @@ uses
 
 {$R *.dfm}
 
-procedure TForm4.ButtonConcluirClick(Sender: TObject);
+
+
+procedure TForm4.ButtonVoltarClick(Sender: TObject);
+begin
+  pag_home.MostrarFormularioEmbed(Form3); // volta para tela de perfil
+end;
+
+procedure TForm4.Image5Click(Sender: TObject);
 var
   NovoIDPrestador: Integer;
 begin
@@ -101,10 +115,29 @@ begin
       ShowMessage('Erro ao salvar: ' + E.Message);
   end;
 end;
+procedure TForm4.Label1MouseEnter(Sender: TObject);
+begin
+Votlar_txt.Enabled:=false
+end;
 
-procedure TForm4.ButtonVoltarClick(Sender: TObject);
+procedure TForm4.Label1MouseLeave(Sender: TObject);
+begin
+Votlar_txt.Enabled:=true
+end;
+
+procedure TForm4.retorna_ao_menuClick(Sender: TObject);
 begin
   pag_home.MostrarFormularioEmbed(Form3); // volta para tela de perfil
+end;
+
+procedure TForm4.Votlar_txtMouseEnter(Sender: TObject);
+begin
+Votlar_txt.Enabled:=false
+end;
+
+procedure TForm4.Votlar_txtMouseLeave(Sender: TObject);
+begin
+ Votlar_txt.Enabled:=true
 end;
 
 end.

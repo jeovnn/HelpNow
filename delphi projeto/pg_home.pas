@@ -48,6 +48,7 @@ begin
   MostrarFormularioEmbed(pag_inicial);
 end;
 
+
 procedure Tpag_home.MostrarFormularioEmbed(AForm: TForm);
 begin
   // Hide all embedded forms

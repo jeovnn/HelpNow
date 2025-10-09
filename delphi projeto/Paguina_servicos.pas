@@ -6,8 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
   System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.Grids, Vcl.DBGrids,
-  Conexao, Vcl.StdCtrls, Vcl.Imaging.pngimage, Vcl.ExtCtrls, paguina_perfil,
-  pg_home;
+  Conexao, Vcl.StdCtrls, Vcl.Imaging.pngimage, Vcl.ExtCtrls, paguina_perfil, pg_home;
 
 type
   TForm2 = class(TForm)
@@ -29,6 +28,7 @@ var
   Form2: TForm2;
 
 implementation
+
 
 {$R *.dfm}
 

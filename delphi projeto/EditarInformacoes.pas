@@ -5,7 +5,8 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Imaging.pngimage,
-  Vcl.ExtCtrls,pg_home,paguina_perfil,conexao,tornarprestador,editarfornecedor;
+  Vcl.ExtCtrls,pg_home,paguina_perfil,conexao,tornarprestador,editarfornecedor,
+  Vcl.Imaging.jpeg;
 
 type
   TForm5 = class(TForm)
@@ -14,22 +15,38 @@ type
     LabelMensagem: TLabel;
     LabelEMail: TLabel;
     LabelTelefone: TLabel;
-    ButtonSalvar: TButton;
     CampoNome: TEdit;
     CampoEmail: TEdit;
     CampoTelefone: TEdit;
-    ButtonVoltar: TButton;
-    ButtonAlterarSenha: TButton;
-    Button2: TButton;
     GroupBox1: TGroupBox;
     CampoSenha: TEdit;
-    ButtonSalvarSenha: TButton;
+    Votlar_txt: TLabel;
+    retorna_ao_menu: TImage;
+    Image2: TImage;
+    Label1: TLabel;
+    Label2: TLabel;
+    Image5: TImage;
+    Label3: TLabel;
+    Image3: TImage;
+    ButtonSalvarSenha: TImage;
+    Label4: TLabel;
     procedure ButtonVoltarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
-    procedure ButtonSalvarClick(Sender: TObject);
-    procedure Button2Click(Sender: TObject);
-    procedure ButtonAlterarSenhaClick(Sender: TObject);
     procedure ButtonSalvarSenhaClick(Sender: TObject);
+    procedure retorna_ao_menuClick(Sender: TObject);
+    procedure Image2Click(Sender: TObject);
+    procedure Image3Click(Sender: TObject);
+    procedure Image4Click(Sender: TObject);
+    procedure Votlar_txtMouseEnter(Sender: TObject);
+    procedure Votlar_txtMouseLeave(Sender: TObject);
+    procedure Label1MouseEnter(Sender: TObject);
+    procedure Label1MouseLeave(Sender: TObject);
+    procedure Label2MouseEnter(Sender: TObject);
+    procedure Label2MouseLeave(Sender: TObject);
+    procedure Label3MouseEnter(Sender: TObject);
+    procedure Label3MouseLeave(Sender: TObject);
+    procedure Label4MouseEnter(Sender: TObject);
+    procedure Label4MouseLeave(Sender: TObject);
   private
     { Private declarations }
   public
@@ -41,36 +58,8 @@ var
 
 implementation
 
+
 {$R *.dfm}
-
-procedure TForm5.ButtonAlterarSenhaClick(Sender: TObject);
-begin
-camposenha.Visible:= true;
-buttonsalvarsenha.Visible:= true;
-end;
-
-procedure TForm5.Button2Click(Sender: TObject);
-begin
-pag_home.MostrarFormularioEmbed(Form6); // volta para tela de perfil
-end;
-
-procedure TForm5.ButtonSalvarClick(Sender: TObject);
-begin
-  with DataModule2.FDQuery1 do
-  begin
-    Close;
-    SQL.Text :=
-      'UPDATE usuario SET nome = :n, email = :e, telefone = :t WHERE id_usuario = :id';
-    ParamByName('n').AsString := CampoNome.Text;
-    ParamByName('e').AsString := CampoEmail.Text;
-    ParamByName('t').AsString := CampoTelefone.Text;
-    ParamByName('id').AsInteger := UsuarioLogadoID;
-    ExecSQL;
-  end;
-
-  ShowMessage('Informações atualizadas com sucesso!');
-
-end;
 
 procedure TForm5.ButtonSalvarSenhaClick(Sender: TObject);
 begin
@@ -135,9 +124,15 @@ begin
     Open;
 
     if not EOF and SameText(FieldByName('tipo').AsString, 'prestador') then
-      Button2.Visible := True   // mostra o botão
+      Image2.Visible := True   // mostra o botão
     else
-      Button2.Visible := False; // esconde o botão
+      Image2.Visible := False ; // esconde o botão
+    Close;
+
+    if not EOF and SameText(FieldByName('tipo').AsString, 'prestador') then
+      Label1.Visible := True   // mostra o botão
+    else
+      Label1.Visible := False ; // esconde o botão
     Close;
   end;
    with DataModule2.FDQuery1 do
@@ -154,6 +149,108 @@ begin
 
     Close;
   end;
+end;
+
+procedure TForm5.Image2Click(Sender: TObject);
+begin
+  with DataModule2.FDQuery1 do
+  begin
+    Close;
+    SQL.Text :=
+      'UPDATE usuario SET nome = :n, email = :e, telefone = :t WHERE id_usuario = :id';
+    ParamByName('n').AsString := CampoNome.Text;
+    ParamByName('e').AsString := CampoEmail.Text;
+    ParamByName('t').AsString := CampoTelefone.Text;
+    ParamByName('id').AsInteger := UsuarioLogadoID;
+    ExecSQL;
+  end;
+
+  ShowMessage('Informações atualizadas com sucesso!');
+
+end;
+
+
+
+procedure TForm5.Image3Click(Sender: TObject);
+begin
+camposenha.Visible:= true;
+buttonsalvarsenha.Visible:= true;
+end;
+
+procedure TForm5.Image4Click(Sender: TObject);
+begin
+  if Trim(CampoSenha.Text) = '' then
+  begin
+    ShowMessage('Digite uma nova senha.');
+    Exit;
+  end;
+
+  with DataModule2.FDQuery1 do
+  begin
+    Close;
+    SQL.Text := 'UPDATE conta SET senha = :s WHERE id_usuario = :id';
+    ParamByName('s').AsString := CampoSenha.Text;
+    ParamByName('id').AsInteger := UsuarioLogadoID;
+    ExecSQL;
+  end;
+
+  ShowMessage('Senha atualizada com sucesso!');
+  CampoSenha.Visible := False;
+  ButtonSalvarSenha.Visible := False;
+end;
+procedure TForm5.Label1MouseEnter(Sender: TObject);
+begin
+Label1.Enabled:=false
+end;
+
+procedure TForm5.Label1MouseLeave(Sender: TObject);
+begin
+Label1.Enabled:=true
+end;
+
+procedure TForm5.Label2MouseEnter(Sender: TObject);
+begin
+Label2.Enabled:=false
+end;
+
+procedure TForm5.Label2MouseLeave(Sender: TObject);
+begin
+Label2.Enabled:=true
+end;
+
+procedure TForm5.Label3MouseEnter(Sender: TObject);
+begin
+Label3.Enabled:=false
+end;
+
+procedure TForm5.Label3MouseLeave(Sender: TObject);
+begin
+Label3.Enabled:=true
+end;
+
+procedure TForm5.Label4MouseEnter(Sender: TObject);
+begin
+Label4.Enabled:=false
+end;
+
+procedure TForm5.Label4MouseLeave(Sender: TObject);
+begin
+  Label4.Enabled:=true
+end;
+
+procedure TForm5.retorna_ao_menuClick(Sender: TObject);
+begin
+  pag_home.MostrarFormularioEmbed(Form3); // volta para tela de perfil
+end;
+
+procedure TForm5.Votlar_txtMouseEnter(Sender: TObject);
+begin
+Votlar_txt.Enabled:=false
+end;
+
+procedure TForm5.Votlar_txtMouseLeave(Sender: TObject);
+begin
+Votlar_txt.Enabled:=true
 end;
 
 end.

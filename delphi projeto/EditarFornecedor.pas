@@ -6,12 +6,10 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
   System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Imaging.pngimage,
-  Vcl.ExtCtrls, pg_home, conexao;
+  Vcl.ExtCtrls, conexao, Vcl.Imaging.jpeg, pg_home;
 
 type
   TForm6 = class(TForm)
-    ButtonConcluir: TButton;
-    ButtonVoltar: TButton;
     EditHabilidades: TEdit;
     EditRegiao: TEdit;
     GroupBox1: TGroupBox;
@@ -19,9 +17,18 @@ type
     LabelMensagem: TLabel;
     LabelPerguntaHabilidades: TLabel;
     LabelPerguntaRegiao: TLabel;
+    Votlar_txt: TLabel;
+    retorna_ao_menu: TImage;
+    Image5: TImage;
+    Label2: TLabel;
     procedure ButtonVoltarClick(Sender: TObject);
-    procedure ButtonConcluirClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure Image5Click(Sender: TObject);
+    procedure Votlar_txtMouseEnter(Sender: TObject);
+    procedure Votlar_txtMouseLeave(Sender: TObject);
+    procedure Label2MouseEnter(Sender: TObject);
+    procedure Label2MouseLeave(Sender: TObject);
+    procedure retorna_ao_menuClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -37,41 +44,6 @@ uses
   editarinformacoes;
 
 {$R *.dfm}
-
-procedure TForm6.ButtonConcluirClick(Sender: TObject);
-begin
-  if not DataModule2.FDConnection1.Connected then
-    DataModule2.FDConnection1.Connected := True;
-
-  // Verifica se os campos estão preenchidos
-  if Trim(EditHabilidades.Text) = '' then
-  begin
-    ShowMessage('Preencha suas habilidades.');
-    Exit;
-  end;
-
-  if Trim(EditRegiao.Text) = '' then
-  begin
-    ShowMessage('Preencha sua região de atendimento.');
-    Exit;
-  end;
-
-  // Atualiza as informações no banco
-  with DataModule2.FDQuery1 do
-  begin
-    Close;
-    SQL.Text := 'UPDATE prestador SET habilidades = :hab, regiao = :reg ' +
-      'WHERE id_usuario = :id';
-    ParamByName('hab').AsString := EditHabilidades.Text;
-    ParamByName('reg').AsString := EditRegiao.Text;
-    ParamByName('id').AsInteger := UsuarioLogadoID;
-    ExecSQL;
-  end;
-
-  ShowMessage('Informações do prestador atualizadas com sucesso!');
-  pag_home.MostrarFormularioEmbed(Form5);
-  // volta para tela de editar informações
-end;
 
 procedure TForm6.ButtonVoltarClick(Sender: TObject);
 begin
@@ -105,6 +77,66 @@ begin
 
     Close;
   end;
+end;
+
+procedure TForm6.Image5Click(Sender: TObject);
+ begin
+  if not DataModule2.FDConnection1.Connected then
+    DataModule2.FDConnection1.Connected := True;
+
+  // Verifica se os campos estão preenchidos
+  if Trim(EditHabilidades.Text) = '' then
+  begin
+    ShowMessage('Preencha suas habilidades.');
+    Exit;
+  end;
+
+  if Trim(EditRegiao.Text) = '' then
+  begin
+    ShowMessage('Preencha sua região de atendimento.');
+    Exit;
+  end;
+
+  // Atualiza as informações no banco
+  with DataModule2.FDQuery1 do
+  begin
+    Close;
+    SQL.Text := 'UPDATE prestador SET habilidades = :hab, regiao = :reg ' +
+      'WHERE id_usuario = :id';
+    ParamByName('hab').AsString := EditHabilidades.Text;
+    ParamByName('reg').AsString := EditRegiao.Text;
+    ParamByName('id').AsInteger := UsuarioLogadoID;
+    ExecSQL;
+  end;
+
+  ShowMessage('Informações do prestador atualizadas com sucesso!');
+  pag_home.MostrarFormularioEmbed(Form5);
+  // volta para tela de editar informações
+end;
+
+procedure TForm6.Label2MouseEnter(Sender: TObject);
+begin
+Label2.Enabled:=false
+end;
+
+procedure TForm6.Label2MouseLeave(Sender: TObject);
+begin
+Label2.Enabled:=true
+end;
+
+procedure TForm6.retorna_ao_menuClick(Sender: TObject);
+begin
+   pag_home.MostrarFormularioEmbed(Form5); // volta para tela de alterar dados
+end;
+
+procedure TForm6.Votlar_txtMouseEnter(Sender: TObject);
+begin
+Votlar_txt.Enabled:=false
+end;
+
+procedure TForm6.Votlar_txtMouseLeave(Sender: TObject);
+begin
+Votlar_txt.Enabled:=true
 end;
 
 end.

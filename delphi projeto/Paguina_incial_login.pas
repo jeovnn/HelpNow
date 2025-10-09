@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
   System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls,
-  Vcl.Imaging.jpeg, Vcl.Imaging.pngimage, Vcl.Mask;
+  Vcl.Imaging.jpeg, Vcl.Imaging.pngimage, Vcl.Mask, Vcl.Buttons;
 
 type
   Tpag_inicial = class(TForm)
@@ -53,6 +53,7 @@ uses
   pg_home, Paguina_login, Paguina_cadastro;
 
 {$R *.dfm}
+
 
 // faz o botao de cadastro mudar de tamanho no click
 procedure Tpag_inicial.botao_cadastroMouseDown(Sender: TObject;
@@ -129,5 +130,4 @@ procedure Tpag_inicial.Cadstro_txtMouseLeave(Sender: TObject);
 begin
   Cadstro_txt.Enabled:=true;
 end;
-
 end.

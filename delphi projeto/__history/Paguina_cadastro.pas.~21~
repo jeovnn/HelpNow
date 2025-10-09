@@ -1,0 +1,202 @@
+unit Paguina_cadastro;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls,
+  Vcl.Imaging.pngimage, Vcl.Imaging.jpeg, conexao;
+
+type
+  Tpag_cadastro = class(TForm)
+    painel_principal: TPanel;
+    text_login_pag: TLabel;
+    descricao: TLabel;
+    label_jaconta: TLabel;
+    goto_cadastro: TLabel;
+    painel_email: TPanel;
+    imagem_email: TImage;
+    label_email: TLabel;
+    email_cad: TEdit;
+    painel_senha_confirmação: TPanel;
+    cpf: TEdit;
+    painel_nome: TPanel;
+    imagem_nome: TImage;
+    label_nome: TLabel;
+    nome_cad: TEdit;
+    painel_senha: TPanel;
+    imagem_senha: TImage;
+    label_senha1: TLabel;
+    senha_cad: TEdit;
+    imagem_cong_senha: TImage;
+    email_direção: TLabel;
+    nome_direção: TLabel;
+    senha_conf_direção: TLabel;
+    senha_direção: TLabel;
+    retorna_ao_menu: TImage;
+    Image1: TImage;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label4: TLabel;
+    Image2: TImage;
+    procedure goto_cadastroClick(Sender: TObject);
+    procedure retorna_menuClick(Sender: TObject);
+    procedure retorna_ao_menuClick(Sender: TObject);
+    procedure retorna_ao_menuMouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure retorna_ao_menuMouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure FormCreate(Sender: TObject);
+    procedure Label2MouseEnter(Sender: TObject);
+    procedure Label2MouseLeave(Sender: TObject);
+    procedure Label4Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  pag_cadastro: Tpag_cadastro;
+  high_voltar: Integer;
+  high_volt_txt: Integer;
+
+implementation
+
+uses
+  pg_home, Paguina_incial_login, Paguina_login, Paguina_servicos;
+
+{$R *.dfm}
+
+procedure Tpag_cadastro.FormCreate(Sender: TObject);
+begin
+  high_voltar := retorna_ao_menu.Top;
+  high_volt_txt := Label2.Top;
+end;
+
+procedure Tpag_cadastro.goto_cadastroClick(Sender: TObject);
+begin
+  pag_home.MostrarFormularioEmbed(pag_login);
+end;
+
+procedure Tpag_cadastro.Label2MouseEnter(Sender: TObject);
+begin
+  Label2.Enabled := false;
+end;
+
+procedure Tpag_cadastro.Label2MouseLeave(Sender: TObject);
+begin
+  Label2.Enabled := true;
+end;
+
+procedure Tpag_cadastro.Label4Click(Sender: TObject);
+var
+  NovoIDUsuario, NovoIDConta: Integer;
+begin
+  if Trim(email_cad.Text) = '' then
+  begin
+    ShowMessage('Digite seu e-mail.');
+    Exit;
+  end;
+
+  if Trim(nome_cad.Text) = '' then
+  begin
+    ShowMessage('Digite seu nome.');
+    Exit;
+  end;
+
+  if Trim(cpf.Text) = '' then
+  begin
+    ShowMessage('Digite seu telefone ou CPF.');
+    Exit;
+  end;
+
+  if Trim(senha_cad.Text) = '' then
+  begin
+    ShowMessage('Digite sua senha.');
+    Exit;
+  end;
+
+  try
+    // 1) Gerar o próximo id_usuario manualmente
+    with DataModule2.FDQuery1 do
+    begin
+      SQL.Text := 'SELECT COALESCE(MAX(id_usuario), 0) + 1 AS prox FROM usuario';
+      Open;
+      NovoIDUsuario := FieldByName('prox').AsInteger;
+      Close;
+    end;
+
+    // 2) Inserir na tabela usuario
+    with DataModule2.FDQuery1 do
+    begin
+      SQL.Text :=
+        'INSERT INTO usuario (id_usuario, email, nome, telefone, data_cadastro) ' +
+        'VALUES (:id, :email, :nome, :telefone, :data_cadastro)';
+      ParamByName('id').AsInteger         := NovoIDUsuario;
+      ParamByName('email').AsString       := email_cad.Text;
+      ParamByName('nome').AsString        := nome_cad.Text;
+      ParamByName('telefone').AsString    := cpf.Text;
+      ParamByName('data_cadastro').AsDate := Date;
+      ExecSQL;
+    end;
+
+    // 3) Gerar o próximo id_conta manualmente
+    with DataModule2.FDQuery1 do
+    begin
+      SQL.Text := 'SELECT COALESCE(MAX(id_conta), 0) + 1 AS prox FROM conta';
+      Open;
+      NovoIDConta := FieldByName('prox').AsInteger;
+      Close;
+    end;
+
+    // 4) Inserir na tabela conta
+    with DataModule2.FDQuery1 do
+    begin
+      SQL.Text :=
+        'INSERT INTO conta (id_conta, id_usuario, usuario, senha, tipo) ' +
+        'VALUES (:id_conta, :id_usuario, :usuario, :senha, :tipo)';
+      ParamByName('id_conta').AsInteger   := NovoIDConta;
+      ParamByName('id_usuario').AsInteger := NovoIDUsuario;
+      ParamByName('usuario').AsString     := email_cad.Text;
+      ParamByName('senha').AsString       := senha_cad.Text;
+      ParamByName('tipo').AsString        := 'cliente';
+      ExecSQL;
+    end;
+
+    ShowMessage('Cadastro realizado com sucesso!');
+    pag_home.MostrarFormularioEmbed(Form2);
+
+  except
+    on E: Exception do
+      ShowMessage('Erro ao cadastrar: ' + E.Message);
+  end;
+end;
+
+
+procedure Tpag_cadastro.retorna_ao_menuClick(Sender: TObject);
+begin
+  pag_home.MostrarFormularioEmbed(pag_inicial);
+end;
+
+procedure Tpag_cadastro.retorna_ao_menuMouseDown(Sender: TObject;
+  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+  retorna_ao_menu.Top := high_voltar;
+  Label2.Top := high_volt_txt;
+end;
+
+procedure Tpag_cadastro.retorna_ao_menuMouseUp(Sender: TObject;
+  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+  retorna_ao_menu.Top := high_voltar + 5;
+  Label2.Top := high_volt_txt + 5;
+end;
+
+procedure Tpag_cadastro.retorna_menuClick(Sender: TObject);
+begin
+  pag_home.MostrarFormularioEmbed(pag_inicial);
+end;
+
+end.

@@ -1,0 +1,69 @@
+unit paguina_perfil;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.Skia,
+  Vcl.Imaging.jpeg, conexao;
+
+type
+  TForm3 = class(TForm)
+    Image1: TImage;
+    LabelNome: TLabel;
+    LabelEmail: TLabel;
+    ButtonEditarInformacoes: TButton;
+    ButtonTornarPrestador: TButton;
+    Button4: TButton;
+    ButtonAlterarSenha: TButton;
+    LabelTipoConta: TLabel;
+    LabelTelefone: TLabel;
+    GroupBox1: TGroupBox;
+    procedure Button4Click(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form3: TForm3;
+
+implementation
+
+uses
+  pg_home, Paguina_servicos;
+
+{$R *.dfm}
+
+procedure TForm3.Button4Click(Sender: TObject);
+begin
+  pag_home.MostrarFormularioEmbed(Form2);
+  Form2.CarregarServicos;
+end;
+
+procedure TForm3.FormShow(Sender: TObject);
+begin
+  if not DataModule2.FDConnection1.Connected then
+    DataModule2.FDConnection1.Connected := True;
+
+  with DataModule2.FDQuery1 do
+  begin
+    Close;
+    SQL.Text := 'SELECT nome, email, cpf FROM usuario WHERE id_usuario = :id';
+    ParamByName('id').AsInteger := UsuarioLogadoID;
+    Open;
+
+    if not EOF then
+    begin
+      LabelNome.Caption := FieldByName('nome').AsString;
+      LabelEmail.Caption := FieldByName('email').AsString;
+    end;
+
+    Close;
+  end;
+end;
+
+end.

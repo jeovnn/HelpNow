@@ -24,4 +24,24 @@ object DataModule2: TDataModule2
     Left = 248
     Top = 40
   end
+  object FDQueryConta: TFDQuery
+    Connection = FDConnection1
+    Left = 248
+    Top = 344
+  end
+  object DataSource2: TDataSource
+    DataSet = FDQueryConta
+    Left = 328
+    Top = 344
+  end
+  object FDQueryServicos: TFDQuery
+    Connection = FDConnection1
+    Left = 248
+    Top = 416
+  end
+  object DataSourceServicos: TDataSource
+    DataSet = FDQueryServicos
+    Left = 336
+    Top = 416
+  end
 end

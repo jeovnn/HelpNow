@@ -13,8 +13,8 @@ object Form3: TForm3
   OnShow = FormShow
   TextHeight = 15
   object GroupBox1: TGroupBox
-    Left = 280
-    Top = 20
+    Left = 288
+    Top = 27
     Width = 441
     Height = 513
     TabOrder = 3
@@ -942,7 +942,7 @@ object Form3: TForm3
     end
     object LabelEmail: TLabel
       Left = 184
-      Top = 66
+      Top = 61
       Width = 138
       Height = 21
       Caption = 'Email@usuario.com'
@@ -991,6 +991,31 @@ object Form3: TForm3
       Font.Name = 'Segoe UI'
       Font.Style = []
       ParentFont = False
+    end
+    object LabelAlterarfoto: TLabel
+      Left = 33
+      Top = 165
+      Width = 60
+      Height = 15
+      Caption = 'Alterar foto'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentFont = False
+      OnClick = LabelAlterarfotoClick
+      OnMouseEnter = LabelAlterarfotoMouseEnter
+      OnMouseLeave = LabelAlterarfotoMouseLeave
+    end
+    object DBImage: TDBImage
+      Left = 33
+      Top = 16
+      Width = 145
+      Height = 17
+      DataSource = DataModule2.DataSource1
+      TabOrder = 0
+      Visible = False
     end
   end
   object ButtonEditarInformacoes: TButton

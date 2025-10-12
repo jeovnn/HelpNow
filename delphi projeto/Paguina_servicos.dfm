@@ -28,7 +28,7 @@ object Form2: TForm2
   end
   object Image1: TImage
     Left = 424
-    Top = 10
+    Top = 8
     Width = 153
     Height = 152
     Picture.Data = {
@@ -3268,21 +3268,31 @@ object Form2: TForm2
     TitleFont.Name = 'Segoe UI'
     TitleFont.Style = []
   end
-  object Button1: TButton
+  object ButtonPerfil: TButton
     Left = 8
     Top = 17
     Width = 122
     Height = 25
     Caption = 'Meu perfil'
     TabOrder = 1
-    OnClick = Button1Click
+    OnClick = ButtonPerfilClick
   end
-  object Button2: TButton
+  object ButtonCadastrarServico: TButton
     Left = 8
-    Top = 56
+    Top = 96
     Width = 122
     Height = 25
     Caption = 'Cadastrar Servi'#231'o'
     TabOrder = 2
+    OnClick = ButtonCadastrarServicoClick
+  end
+  object ButtonMeusServicos: TButton
+    Left = 8
+    Top = 56
+    Width = 122
+    Height = 25
+    Caption = 'Meus Servicos'
+    TabOrder = 3
+    OnClick = ButtonMeusServicosClick
   end
 end

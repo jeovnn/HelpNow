@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
   System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.Skia,
-  Vcl.Imaging.jpeg, conexao, tornarprestador;
+  Vcl.Imaging.jpeg, conexao, tornarprestador, Vcl.DBCtrls, data.db;
 
 type
   TForm3 = class(TForm)
@@ -19,10 +19,15 @@ type
     LabelTipoConta: TLabel;
     LabelTelefone: TLabel;
     GroupBox1: TGroupBox;
+    DBImage: TDBImage;
+    LabelAlterarfoto: TLabel;
     procedure Button4Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure ButtonTornarPrestadorClick(Sender: TObject);
     procedure ButtonEditarInformacoesClick(Sender: TObject);
+    procedure LabelAlterarfotoClick(Sender: TObject);
+    procedure LabelAlterarfotoMouseEnter(Sender: TObject);
+    procedure LabelAlterarfotoMouseLeave(Sender: TObject);
   private
     { Private declarations }
   public
@@ -35,7 +40,7 @@ var
 implementation
 
 uses
-  pg_home, Paguina_servicos,editarInformacoes;
+  pg_home, Paguina_servicos, editarInformacoes;
 
 {$R *.dfm}
 
@@ -70,7 +75,8 @@ begin
   with DataModule2.FDQuery1 do
   begin
     Close;
-    SQL.Text := 'SELECT nome, email, cpf, telefone FROM usuario WHERE id_usuario = :id';
+    SQL.Text :=
+      'SELECT nome, email, cpf, telefone FROM usuario WHERE id_usuario = :id';
     ParamByName('id').AsInteger := UsuarioLogadoID;
     Open;
 
@@ -83,8 +89,9 @@ begin
       if Trim(FieldByName('telefone').AsString) = '' then
         LabelTelefone.Caption := '! Cadastrar telefone'
       else
-        LabelTelefone.Caption := 'Telefone: ' + FieldByName('telefone').AsString;
-        labelTelefone.Font.Color:=Clwhite;
+        LabelTelefone.Caption := 'Telefone: ' + FieldByName('telefone')
+          .AsString;
+      LabelTelefone.Font.Color := Clwhite;
 
     end;
     Close;
@@ -119,7 +126,76 @@ begin
 
     Close;
   end;
+  // Após carregar os outros dados do usuário
+with DataModule2.FDQuery1 do
+begin
+  Close;
+  SQL.Text := 'SELECT image FROM usuario WHERE id_usuario = :id';
+  ParamByName('id').AsInteger := UsuarioLogadoID;
+  Open;
+
+  if not FieldByName('image').IsNull then
+  begin
+    // cria um stream temporário para ler o blob
+    var Stream := TMemoryStream.Create;
+    try
+      TBlobField(FieldByName('image')).SaveToStream(Stream);
+      Stream.Position := 0;
+      Image1.Picture.LoadFromStream(Stream); // carrega no TImage
+    finally
+      Stream.Free;
+    end;
+    Image1.Visible := True; // garante que a imagem carregada apareça
+  end
+  else
+  begin
+    // se não tiver imagem no banco, mostra a imagem padrão (a que já está no form)
+    Image1.Visible := True;
+  end;
+
+  Close;
+end;
 end;
 
+procedure TForm3.LabelAlterarfotoClick(Sender: TObject);
+begin
+  with TOpenDialog.Create(Self) do
+    try
+      Filter := 'Imagens|*.jpg;*.jpeg;*.png|Todos os arquivos|*.*';
+      if Execute then
+      begin
+        // Abre o registro para edição
+        with DataModule2.FDQuery1 do
+        begin
+          Close;
+          SQL.Text := 'SELECT * FROM usuario WHERE id_usuario = :id';
+          ParamByName('id').AsInteger := UsuarioLogadoID;
+          Open;
+
+          if not(State in [dsEdit, dsInsert]) then
+            Edit;
+
+          // Carrega a imagem no campo blob
+          TBlobField(FieldByName('image')).LoadFromFile(FileName);
+          Post;
+        end;
+
+        ShowMessage('Imagem salva com sucesso!');
+        Form3.FormShow(nil); // recarrega a imagem no perfil
+      end;
+    finally
+      Free;
+    end;
+end;
+
+procedure TForm3.LabelAlterarfotoMouseEnter(Sender: TObject);
+begin
+  LabelAlterarfoto.Font.Color := clSkyBlue; // muda a cor quando o mouse entra
+end;
+
+procedure TForm3.LabelAlterarfotoMouseLeave(Sender: TObject);
+begin
+  LabelAlterarfoto.Font.Color := Clwhite;
+end;
 
 end.

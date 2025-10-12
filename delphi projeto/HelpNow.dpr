@@ -11,7 +11,9 @@ uses
   paguina_perfil in 'paguina_perfil.pas' {Form3},
   TornarPrestador in 'TornarPrestador.pas' {Form4},
   EditarInformacoes in 'EditarInformacoes.pas' {Form5},
-  EditarFornecedor in 'EditarFornecedor.pas' {Form6};
+  EditarFornecedor in 'EditarFornecedor.pas' {Form6},
+  CadastrarServico in 'CadastrarServico.pas' {Form7},
+  MeusServicos in 'MeusServicos.pas' {Form8};
 
 //Perfil in 'Perfil.pas' {Form2};
 
@@ -30,6 +32,7 @@ begin
   Application.CreateForm(TForm4, FormPrestador);
   Application.CreateForm(TForm5, Form5);
   Application.CreateForm(TForm6, Form6);
-  //Application.CreateForm(TForm2, Form2);
+  Application.CreateForm(TForm7, Form7);
+  Application.CreateForm(TForm8, Form8);
   Application.Run;
 end.

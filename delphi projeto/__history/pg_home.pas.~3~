@@ -1,0 +1,71 @@
+unit pg_home;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
+  Vcl.Controls, Paguina_cadastro, Paguina_login, Paguina_incial_login,
+  Vcl.Forms, Vcl.Dialogs,
+  Vcl.ExtCtrls, FireDAC.Phys.FBDef, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Error, FireDAC.UI.Intf, FireDAC.Phys.Intf, FireDAC.Stan.Def,
+  FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.FB,
+  FireDAC.VCLUI.Wait, FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf,
+  FireDAC.DApt, Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client,
+  FireDAC.Phys.IBBase,paguina_perfil;
+
+type
+  Tpag_home = class(TForm)
+    Panel1: TPanel;
+    procedure FormCreate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    procedure MostrarFormularioEmbed(AForm: TForm);
+  end;
+
+var
+  pag_home: Tpag_home;
+
+implementation
+
+{$R *.dfm}
+
+procedure Tpag_home.FormCreate(Sender: TObject);
+begin
+  pag_inicial := Tpag_inicial.Create(Self);
+  pag_login := Tpag_login.Create(Self);
+  pag_cadastro := Tpag_cadastro.Create(Self);
+  Form3 := TForm3.Create(Self);
+
+  pag_inicial.Visible := False;
+  pag_login.Visible := False;
+  pag_cadastro.Visible := False;
+  Form3.Visible := False;
+
+  MostrarFormularioEmbed(pag_inicial);
+end;
+
+procedure Tpag_home.MostrarFormularioEmbed(AForm: TForm);
+begin
+  // Hide all embedded forms
+  if Assigned(pag_inicial) then
+    pag_inicial.Visible := False;
+  if Assigned(pag_login) then
+    pag_login.Visible := False;
+  if Assigned(pag_cadastro) then
+    pag_cadastro.Visible := False;
+  if Assigned(Form3) then
+    Form3.Visible := False;
+
+
+  // Embed the requested form
+  AForm.Parent := Panel1;
+  AForm.BorderStyle := bsNone;
+  AForm.Align := alClient;
+  AForm.Visible := True;
+  AForm.Show;
+end;
+
+end.

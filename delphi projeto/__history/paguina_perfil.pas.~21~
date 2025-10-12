@@ -1,0 +1,125 @@
+﻿unit paguina_perfil;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.Skia,
+  Vcl.Imaging.jpeg, conexao, tornarprestador;
+
+type
+  TForm3 = class(TForm)
+    Image1: TImage;
+    LabelNome: TLabel;
+    LabelEmail: TLabel;
+    ButtonEditarInformacoes: TButton;
+    ButtonTornarPrestador: TButton;
+    Button4: TButton;
+    LabelTipoConta: TLabel;
+    LabelTelefone: TLabel;
+    GroupBox1: TGroupBox;
+    procedure Button4Click(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure ButtonTornarPrestadorClick(Sender: TObject);
+    procedure ButtonEditarInformacoesClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form3: TForm3;
+
+implementation
+
+uses
+  pg_home, Paguina_servicos,editarInformacoes;
+
+{$R *.dfm}
+
+procedure TForm3.Button4Click(Sender: TObject);
+begin
+  pag_home.MostrarFormularioEmbed(Form2);
+  Form2.CarregarServicos;
+end;
+
+procedure TForm3.ButtonEditarInformacoesClick(Sender: TObject);
+begin
+  pag_home.MostrarFormularioEmbed(Form5); // vai pra tela de edição
+end;
+
+procedure TForm3.ButtonTornarPrestadorClick(Sender: TObject);
+begin
+  // Abre a tela para preencher habilidades e região
+  FormPrestador := TForm4.Create(Self);
+  try
+    pag_home.MostrarFormularioEmbed(FormPrestador);
+  finally
+    // Não libera ainda — o form será fechado manualmente
+  end;
+end;
+
+procedure TForm3.FormShow(Sender: TObject);
+begin
+  if not DataModule2.FDConnection1.Connected then
+    DataModule2.FDConnection1.Connected := True;
+
+  // Puxa dados do usuário
+  with DataModule2.FDQuery1 do
+  begin
+    Close;
+    SQL.Text := 'SELECT nome, email, cpf, telefone FROM usuario WHERE id_usuario = :id';
+    ParamByName('id').AsInteger := UsuarioLogadoID;
+    Open;
+
+    if not EOF then
+    begin
+      LabelNome.Caption := FieldByName('nome').AsString;
+      LabelEmail.Caption := FieldByName('email').AsString;
+
+      // Verifica telefone
+      if Trim(FieldByName('telefone').AsString) = '' then
+        LabelTelefone.Caption := '! Cadastrar telefone'
+      else
+        LabelTelefone.Caption := 'Telefone: ' + FieldByName('telefone').AsString;
+        labelTelefone.Font.Color:=ClBlack;
+
+    end;
+    Close;
+  end;
+
+  // 🔹 Puxa o tipo de conta (cliente ou prestador)
+  with DataModule2.FDQuery1 do
+  begin
+    Close;
+    SQL.Text := 'SELECT tipo FROM conta WHERE id_usuario = :id';
+    ParamByName('id').AsInteger := UsuarioLogadoID;
+    Open;
+
+    if not EOF then
+    begin
+      if SameText(FieldByName('tipo').AsString, 'prestador') then
+      begin
+        LabelTipoConta.Caption := 'Tipo de conta: Prestador';
+        ButtonTornarPrestador.Visible := False; // esconde o botão
+      end
+      else
+      begin
+        LabelTipoConta.Caption := 'Tipo de conta: Cliente';
+        ButtonTornarPrestador.Visible := True; // mostra o botão
+      end;
+    end
+    else
+    begin
+      LabelTipoConta.Caption := 'Tipo de conta: Cliente';
+      ButtonTornarPrestador.Visible := True;
+    end;
+
+    Close;
+  end;
+end;
+
+
+end.

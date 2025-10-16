@@ -21,6 +21,7 @@ type
     GroupBox1: TGroupBox;
     DBImage: TDBImage;
     LabelAlterarfoto: TLabel;
+    Image2: TImage;
     procedure Button4Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure ButtonTornarPrestadorClick(Sender: TObject);

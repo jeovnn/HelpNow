@@ -5,7 +5,8 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Imaging.pngimage, Vcl.ExtCtrls,
-  Data.DB, Vcl.Grids, Vcl.DBGrids, Vcl.StdCtrls,conexao,pg_home;
+  Data.DB, Vcl.Grids, Vcl.DBGrids, Vcl.StdCtrls,conexao,pg_home,
+  Vcl.Imaging.jpeg;
 
 type
   TForm8 = class(TForm)
@@ -13,6 +14,7 @@ type
     text_telaservicos: TLabel;
     DBGridMeusservicos: TDBGrid;
     ButtonVoltar: TButton;
+    Image2: TImage;
     procedure ButtonVoltarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
   private

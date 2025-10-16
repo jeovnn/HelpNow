@@ -5,7 +5,8 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Imaging.pngimage,
-  Vcl.ExtCtrls,pg_home,paguina_perfil,conexao,tornarprestador,editarfornecedor;
+  Vcl.ExtCtrls,pg_home,paguina_perfil,conexao,tornarprestador,editarfornecedor,
+  Vcl.Imaging.jpeg;
 
 type
   TForm5 = class(TForm)
@@ -24,6 +25,7 @@ type
     GroupBox1: TGroupBox;
     CampoSenha: TEdit;
     ButtonSalvarSenha: TButton;
+    Image2: TImage;
     procedure ButtonVoltarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure ButtonSalvarClick(Sender: TObject);

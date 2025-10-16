@@ -17,6 +17,7 @@ type
     Image1: TImage;
     ButtonCadastrarServico: TButton;
     ButtonMeusServicos: TButton;
+    Image2: TImage;
     procedure FormShow(Sender: TObject);
     procedure ButtonPerfilClick(Sender: TObject);
     procedure ButtonCadastrarServicoClick(Sender: TObject);

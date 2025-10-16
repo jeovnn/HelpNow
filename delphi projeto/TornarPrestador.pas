@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
   System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Imaging.pngimage,
-  Vcl.ExtCtrls, conexao;
+  Vcl.ExtCtrls, conexao, Vcl.Imaging.jpeg;
 
 type
   TForm4 = class(TForm)
@@ -19,6 +19,7 @@ type
     ButtonConcluir: TButton;
     ButtonVoltar: TButton;
     GroupBox1: TGroupBox;
+    Image2: TImage;
     procedure ButtonConcluirClick(Sender: TObject);
     procedure ButtonVoltarClick(Sender: TObject);
   private

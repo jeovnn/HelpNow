@@ -5,13 +5,7 @@ object DataModule2: TDataModule2
     Params.Strings = (
       'User_Name=sysdba'
       'Password=masterkey'
-<<<<<<< HEAD
-      
-        'Database=C:\Users\emili\OneDrive\'#193'rea de Trabalho\HelpNow\WELPNO' +
-        'W3.FDB'
-=======
       'Database=C:\Users\jeova\Bancos\WELPNOW3.FDB'
->>>>>>> 3ee3812e504db39a9244a58c8c402d29f4ad420e
       'DriverID=FB')
     Left = 128
     Top = 40
@@ -29,8 +23,6 @@ object DataModule2: TDataModule2
     Connection = FDConnection1
     Left = 248
     Top = 40
-<<<<<<< HEAD
-=======
   end
   object FDQueryConta: TFDQuery
     Connection = FDConnection1
@@ -51,6 +43,5 @@ object DataModule2: TDataModule2
     DataSet = FDQueryServicos
     Left = 336
     Top = 416
->>>>>>> 3ee3812e504db39a9244a58c8c402d29f4ad420e
   end
 end

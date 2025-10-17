@@ -16,18 +16,12 @@ type
     LabelPerguntaHabilidades: TLabel;
     EditRegiao: TEdit;
     LabelPerguntaRegiao: TLabel;
+    ButtonConcluir: TButton;
+    ButtonVoltar: TButton;
     GroupBox1: TGroupBox;
-    Votlar_txt: TLabel;
-    retorna_ao_menu: TImage;
-    Image5: TImage;
-    Label1: TLabel;
+    Image2: TImage;
+    procedure ButtonConcluirClick(Sender: TObject);
     procedure ButtonVoltarClick(Sender: TObject);
-    procedure retorna_ao_menuClick(Sender: TObject);
-    procedure Image5Click(Sender: TObject);
-    procedure Votlar_txtMouseEnter(Sender: TObject);
-    procedure Votlar_txtMouseLeave(Sender: TObject);
-    procedure Label1MouseLeave(Sender: TObject);
-    procedure Label1MouseEnter(Sender: TObject);
   private
     { Private declarations }
   public
@@ -44,14 +38,7 @@ uses
 
 {$R *.dfm}
 
-
-
-procedure TForm4.ButtonVoltarClick(Sender: TObject);
-begin
-  pag_home.MostrarFormularioEmbed(Form3); // volta para tela de perfil
-end;
-
-procedure TForm4.Image5Click(Sender: TObject);
+procedure TForm4.ButtonConcluirClick(Sender: TObject);
 var
   NovoIDPrestador: Integer;
 begin
@@ -115,29 +102,10 @@ begin
       ShowMessage('Erro ao salvar: ' + E.Message);
   end;
 end;
-procedure TForm4.Label1MouseEnter(Sender: TObject);
-begin
-Votlar_txt.Enabled:=false
-end;
 
-procedure TForm4.Label1MouseLeave(Sender: TObject);
-begin
-Votlar_txt.Enabled:=true
-end;
-
-procedure TForm4.retorna_ao_menuClick(Sender: TObject);
+procedure TForm4.ButtonVoltarClick(Sender: TObject);
 begin
   pag_home.MostrarFormularioEmbed(Form3); // volta para tela de perfil
-end;
-
-procedure TForm4.Votlar_txtMouseEnter(Sender: TObject);
-begin
-Votlar_txt.Enabled:=false
-end;
-
-procedure TForm4.Votlar_txtMouseLeave(Sender: TObject);
-begin
- Votlar_txt.Enabled:=true
 end;
 
 end.

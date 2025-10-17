@@ -6,10 +6,12 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
   System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Imaging.pngimage,
-  Vcl.ExtCtrls, conexao, Vcl.Imaging.jpeg, pg_home;
+  Vcl.ExtCtrls, pg_home, conexao, Vcl.Imaging.jpeg;
 
 type
   TForm6 = class(TForm)
+    ButtonConcluir: TButton;
+    ButtonVoltar: TButton;
     EditHabilidades: TEdit;
     EditRegiao: TEdit;
     GroupBox1: TGroupBox;
@@ -17,18 +19,10 @@ type
     LabelMensagem: TLabel;
     LabelPerguntaHabilidades: TLabel;
     LabelPerguntaRegiao: TLabel;
-    Votlar_txt: TLabel;
-    retorna_ao_menu: TImage;
-    Image5: TImage;
-    Label2: TLabel;
+    Image2: TImage;
     procedure ButtonVoltarClick(Sender: TObject);
+    procedure ButtonConcluirClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
-    procedure Image5Click(Sender: TObject);
-    procedure Votlar_txtMouseEnter(Sender: TObject);
-    procedure Votlar_txtMouseLeave(Sender: TObject);
-    procedure Label2MouseEnter(Sender: TObject);
-    procedure Label2MouseLeave(Sender: TObject);
-    procedure retorna_ao_menuClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -45,42 +39,8 @@ uses
 
 {$R *.dfm}
 
-procedure TForm6.ButtonVoltarClick(Sender: TObject);
+procedure TForm6.ButtonConcluirClick(Sender: TObject);
 begin
-  pag_home.MostrarFormularioEmbed(Form5); // volta para tela de alterar dados
-end;
-
-procedure TForm6.FormShow(Sender: TObject);
-begin
-  if not DataModule2.FDConnection1.Connected then
-    DataModule2.FDConnection1.Connected := True;
-
-  // Busca habilidades e região já cadastradas no banco
-  with DataModule2.FDQuery1 do
-  begin
-    Close;
-    SQL.Text :=
-      'SELECT habilidades, regiao FROM prestador WHERE id_usuario = :id';
-    ParamByName('id').AsInteger := UsuarioLogadoID;
-    Open;
-
-    if not EOF then
-    begin
-      EditHabilidades.Text := FieldByName('habilidades').AsString;
-      EditRegiao.Text := FieldByName('regiao').AsString;
-    end
-    else
-    begin
-      EditHabilidades.Clear;
-      EditRegiao.Clear;
-    end;
-
-    Close;
-  end;
-end;
-
-procedure TForm6.Image5Click(Sender: TObject);
- begin
   if not DataModule2.FDConnection1.Connected then
     DataModule2.FDConnection1.Connected := True;
 
@@ -114,29 +74,38 @@ procedure TForm6.Image5Click(Sender: TObject);
   // volta para tela de editar informações
 end;
 
-procedure TForm6.Label2MouseEnter(Sender: TObject);
+procedure TForm6.ButtonVoltarClick(Sender: TObject);
 begin
-Label2.Enabled:=false
+  pag_home.MostrarFormularioEmbed(Form5); // volta para tela de alterar dados
 end;
 
-procedure TForm6.Label2MouseLeave(Sender: TObject);
+procedure TForm6.FormShow(Sender: TObject);
 begin
-Label2.Enabled:=true
-end;
+  if not DataModule2.FDConnection1.Connected then
+    DataModule2.FDConnection1.Connected := True;
 
-procedure TForm6.retorna_ao_menuClick(Sender: TObject);
-begin
-   pag_home.MostrarFormularioEmbed(Form5); // volta para tela de alterar dados
-end;
+  // Busca habilidades e região já cadastradas no banco
+  with DataModule2.FDQuery1 do
+  begin
+    Close;
+    SQL.Text :=
+      'SELECT habilidades, regiao FROM prestador WHERE id_usuario = :id';
+    ParamByName('id').AsInteger := UsuarioLogadoID;
+    Open;
 
-procedure TForm6.Votlar_txtMouseEnter(Sender: TObject);
-begin
-Votlar_txt.Enabled:=false
-end;
+    if not EOF then
+    begin
+      EditHabilidades.Text := FieldByName('habilidades').AsString;
+      EditRegiao.Text := FieldByName('regiao').AsString;
+    end
+    else
+    begin
+      EditHabilidades.Clear;
+      EditRegiao.Clear;
+    end;
 
-procedure TForm6.Votlar_txtMouseLeave(Sender: TObject);
-begin
-Votlar_txt.Enabled:=true
+    Close;
+  end;
 end;
 
 end.

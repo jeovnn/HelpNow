@@ -1,0 +1,42 @@
+unit EditarFornecedor;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Imaging.pngimage,
+  Vcl.ExtCtrls,pg_home;
+
+type
+  TForm6 = class(TForm)
+    ButtonConcluir: TButton;
+    ButtonVoltar: TButton;
+    EditHabilidades: TEdit;
+    EditRegiao: TEdit;
+    GroupBox1: TGroupBox;
+    Image1: TImage;
+    LabelMensagem: TLabel;
+    LabelPerguntaHabilidades: TLabel;
+    LabelPerguntaRegiao: TLabel;
+    procedure ButtonVoltarClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form6: TForm6;
+
+implementation
+uses
+editarinformacoes;
+
+{$R *.dfm}
+
+procedure TForm6.ButtonVoltarClick(Sender: TObject);
+begin
+pag_home.MostrarFormularioEmbed(Form5); // volta para tela de alterar dados
+end;
+
+end.

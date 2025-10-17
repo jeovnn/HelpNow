@@ -1,0 +1,42 @@
+unit CadastrarServico;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Imaging.pngimage,
+  Vcl.ExtCtrls,pg_home;
+
+type
+  TForm7 = class(TForm)
+    GroupBox1: TGroupBox;
+    Image1: TImage;
+    LabelMensagem: TLabel;
+    ButtonVoltar: TButton;
+    Labeltitulo: TLabel;
+    EditTitulo: TEdit;
+    LabelDescricao: TLabel;
+    EditDescricao: TEdit;
+    Labelpreco: TLabel;
+    Editpreço: TEdit;
+    procedure ButtonVoltarClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form7: TForm7;
+
+implementation
+uses
+Paguina_servicos;
+{$R *.dfm}
+
+procedure TForm7.ButtonVoltarClick(Sender: TObject);
+begin
+  pag_home.MostrarFormularioEmbed(Form2);
+end;
+
+end.

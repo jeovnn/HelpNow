@@ -11,29 +11,14 @@ uses
 type
   Tpag_inicial = class(TForm)
     painel_principal: TPanel;
-    botao_login: TImage;
     text_login_inicial: TLabel;
-    botao_cadastro: TImage;
     descricao: TLabel;
-    Cadstro_txt: TLabel;
-    Login_txt: TLabel;
     Image1: TImage;
-    procedure botao_loginMouseDown(Sender: TObject; Button: TMouseButton;
-      Shift: TShiftState; X, Y: Integer);
-    procedure botao_loginMouseUp(Sender: TObject; Button: TMouseButton;
-      Shift: TShiftState; X, Y: Integer);
-    procedure botao_loginClick(Sender: TObject);
-    procedure botao_cadastroClick(Sender: TObject);
-    procedure botao_cadastroMouseDown(Sender: TObject; Button: TMouseButton;
-      Shift: TShiftState; X, Y: Integer);
-    procedure botao_cadastroMouseUp(Sender: TObject; Button: TMouseButton;
-      Shift: TShiftState; X, Y: Integer);
-    procedure FormCreate(Sender: TObject);
-    procedure Cadstro_txtMouseEnter(Sender: TObject);
-    procedure Cadstro_txtMouseLeave(Sender: TObject);
-    procedure Login_txtMouseEnter(Sender: TObject);
-    procedure Login_txtMouseLeave(Sender: TObject);
-    procedure Login_txtClick(Sender: TObject);
+    ButtonLogin: TButton;
+    ButtonCadastro: TButton;
+    Image2: TImage;
+    procedure ButtonLoginClick(Sender: TObject);
+    procedure ButtonCadastroClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -54,80 +39,14 @@ uses
 
 {$R *.dfm}
 
-
-// faz o botao de cadastro mudar de tamanho no click
-procedure Tpag_inicial.botao_cadastroMouseDown(Sender: TObject;
-  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+procedure Tpag_inicial.ButtonCadastroClick(Sender: TObject);
 begin
-  botao_cadastro.Top := high_cadastro + 10;
-  Cadstro_txt.Top:= high_label+10;
+pag_home.MostrarFormularioEmbed(pag_cadastro);
 end;
 
-procedure Tpag_inicial.botao_cadastroMouseUp(Sender: TObject;
-  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-begin
-  botao_cadastro.Top := high_cadastro;
-  Cadstro_txt.Top:= high_label;
-end;
-
-procedure Tpag_inicial.botao_loginClick(Sender: TObject);
-begin
-  pag_home.MostrarFormularioEmbed(pag_login);
-end;
-
-procedure Tpag_inicial.botao_cadastroClick(Sender: TObject);
-begin
-  pag_home.MostrarFormularioEmbed(pag_cadastro);
-end;
-
-// faz o botao de login mudar de tamanho no click
-procedure Tpag_inicial.botao_loginMouseDown(Sender: TObject;
-  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-begin
-  botao_login.Top := high_login + 10;
-  Login_txt.Top := high_label2 + 10;
-end;
-
-
-procedure Tpag_inicial.botao_loginMouseUp(Sender: TObject; Button: TMouseButton;
-  Shift: TShiftState; X, Y: Integer);
-begin
-  botao_login.Top := high_login;
-  Login_txt.Top := high_label2;
-end;
-
-procedure Tpag_inicial.FormCreate(Sender: TObject);
-begin
-  high_login := botao_login.Top;
-  high_cadastro := botao_cadastro.Top;
-  high_label := Cadstro_txt.Top;
-  high_label2:= Login_txt.Top;
-end;
-
-procedure Tpag_inicial.Login_txtClick(Sender: TObject);
+procedure Tpag_inicial.ButtonLoginClick(Sender: TObject);
 begin
 pag_home.MostrarFormularioEmbed(pag_login);
 end;
 
-procedure Tpag_inicial.Login_txtMouseEnter(Sender: TObject);
-begin
-    Login_txt.Enabled:=false;
-end;
-
-
-procedure Tpag_inicial.Login_txtMouseLeave(Sender: TObject);
-begin
-    Login_txt.Enabled:=true;
-end;
-
-
-procedure Tpag_inicial.Cadstro_txtMouseEnter(Sender: TObject);
-begin
-  Cadstro_txt.Enabled:=false;
-end;
-
-procedure Tpag_inicial.Cadstro_txtMouseLeave(Sender: TObject);
-begin
-  Cadstro_txt.Enabled:=true;
-end;
 end.

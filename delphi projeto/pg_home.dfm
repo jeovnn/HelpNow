@@ -4,7 +4,7 @@ object pag_home: Tpag_home
   Caption = 'pag_home'
   ClientHeight = 546
   ClientWidth = 969
-  Color = clMaroon
+  Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -12
@@ -17,16 +17,8 @@ object pag_home: Tpag_home
     Top = 0
     Width = 969
     Height = 546
-    Margins.Left = 10
-    Margins.Top = 10
-    Margins.Right = 10
-    Margins.Bottom = 10
     Align = alClient
     Caption = 'painel_principal'
     TabOrder = 0
-    ExplicitLeft = 15
-    ExplicitTop = 15
-    ExplicitWidth = 949
-    ExplicitHeight = 526
   end
 end

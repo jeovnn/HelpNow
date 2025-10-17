@@ -6,17 +6,22 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
   System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.Grids, Vcl.DBGrids,
-  Conexao, Vcl.StdCtrls, Vcl.Imaging.pngimage, Vcl.ExtCtrls, paguina_perfil, pg_home;
+  Conexao, Vcl.StdCtrls, Vcl.Imaging.pngimage, Vcl.ExtCtrls, paguina_perfil,
+  pg_home, Vcl.Imaging.jpeg,CadastrarServico,meusservicos;
 
 type
   TForm2 = class(TForm)
     DBGrid1: TDBGrid;
     text_telaservicos: TLabel;
-    Button1: TButton;
+    ButtonPerfil: TButton;
     Image1: TImage;
-    Button2: TButton;
+    ButtonCadastrarServico: TButton;
+    ButtonMeusServicos: TButton;
+    Image2: TImage;
     procedure FormShow(Sender: TObject);
-    procedure Button1Click(Sender: TObject);
+    procedure ButtonPerfilClick(Sender: TObject);
+    procedure ButtonCadastrarServicoClick(Sender: TObject);
+    procedure ButtonMeusServicosClick(Sender: TObject);
   private
 
   public
@@ -29,10 +34,19 @@ var
 
 implementation
 
-
 {$R *.dfm}
 
-procedure TForm2.Button1Click(Sender: TObject);
+procedure TForm2.ButtonCadastrarServicoClick(Sender: TObject);
+begin
+  pag_home.MostrarFormularioEmbed(Form7);
+end;
+
+procedure TForm2.ButtonMeusServicosClick(Sender: TObject);
+begin
+  pag_home.MostrarFormularioEmbed(Form8);
+end;
+
+procedure TForm2.ButtonPerfilClick(Sender: TObject);
 begin
   pag_home.MostrarFormularioEmbed(Form3);
 end;
@@ -58,6 +72,29 @@ end;
 procedure TForm2.FormShow(Sender: TObject);
 begin
   CarregarServicos;
+   // Verifica o tipo de conta do usuário logado
+  if not DataModule2.FDConnection1.Connected then
+    DataModule2.FDConnection1.Connected := True;
+
+  with DataModule2.FDQueryConta do
+  begin
+    Close;
+    SQL.Text := 'SELECT tipo FROM conta WHERE id_usuario = :id';
+    ParamByName('id').AsInteger := UsuarioLogadoID;
+    Open;
+
+    // Se o tipo for "prestador", mostra os botoes
+    if not EOF and SameText(FieldByName('tipo').AsString, 'prestador') then
+      ButtonCadastrarServico.Visible := True
+    else
+      ButtonCadastrarServico.Visible := False;
+
+    if not EOF and SameText(FieldByName('tipo').AsString, 'prestador') then
+      ButtonMeusServicos.Visible := True
+    else
+      ButtonMeusServicos.Visible := False;
+    Close;
+  end;
 end;
 
 end.

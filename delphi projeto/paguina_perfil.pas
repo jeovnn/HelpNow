@@ -6,33 +6,29 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
   System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.Skia,
-  Vcl.Imaging.jpeg, conexao, tornarprestador;
+  Vcl.Imaging.jpeg, conexao, tornarprestador, Vcl.DBCtrls, data.db;
 
 type
   TForm3 = class(TForm)
     Image1: TImage;
     LabelNome: TLabel;
     LabelEmail: TLabel;
+    ButtonEditarInformacoes: TButton;
+    ButtonTornarPrestador: TButton;
+    Button4: TButton;
     LabelTipoConta: TLabel;
     LabelTelefone: TLabel;
     GroupBox1: TGroupBox;
-    Votlar_txt: TLabel;
-    retorna_ao_menu: TImage;
-    ButtonTornarPrestador: TImage;
-    Label1: TLabel;
-    Label2: TLabel;
-    Image5: TImage;
+    DBImage: TDBImage;
+    LabelAlterarfoto: TLabel;
+    Image2: TImage;
     procedure Button4Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
-    procedure retorna_ao_menuClick(Sender: TObject);
-    procedure Image5Click(Sender: TObject);
-    procedure Image2Click(Sender: TObject);
-    procedure Votlar_txtMouseEnter(Sender: TObject);
-    procedure Votlar_txtMouseLeave(Sender: TObject);
-    procedure Label1MouseEnter(Sender: TObject);
-    procedure Label1MouseLeave(Sender: TObject);
-    procedure Label2MouseEnter(Sender: TObject);
-    procedure Label2MouseLeave(Sender: TObject);
+    procedure ButtonTornarPrestadorClick(Sender: TObject);
+    procedure ButtonEditarInformacoesClick(Sender: TObject);
+    procedure LabelAlterarfotoClick(Sender: TObject);
+    procedure LabelAlterarfotoMouseEnter(Sender: TObject);
+    procedure LabelAlterarfotoMouseLeave(Sender: TObject);
   private
     { Private declarations }
   public
@@ -45,7 +41,7 @@ var
 implementation
 
 uses
-  pg_home, Paguina_servicos,editarInformacoes;
+  pg_home, Paguina_servicos, editarInformacoes;
 
 {$R *.dfm}
 
@@ -53,6 +49,22 @@ procedure TForm3.Button4Click(Sender: TObject);
 begin
   pag_home.MostrarFormularioEmbed(Form2);
   Form2.CarregarServicos;
+end;
+
+procedure TForm3.ButtonEditarInformacoesClick(Sender: TObject);
+begin
+  pag_home.MostrarFormularioEmbed(Form5); // vai pra tela de edição
+end;
+
+procedure TForm3.ButtonTornarPrestadorClick(Sender: TObject);
+begin
+  // Abre a tela para preencher habilidades e região
+  FormPrestador := TForm4.Create(Self);
+  try
+    pag_home.MostrarFormularioEmbed(FormPrestador);
+  finally
+    // Não libera ainda — o form será fechado manualmente
+  end;
 end;
 
 procedure TForm3.FormShow(Sender: TObject);
@@ -64,7 +76,8 @@ begin
   with DataModule2.FDQuery1 do
   begin
     Close;
-    SQL.Text := 'SELECT nome, email, cpf, telefone FROM usuario WHERE id_usuario = :id';
+    SQL.Text :=
+      'SELECT nome, email, cpf, telefone FROM usuario WHERE id_usuario = :id';
     ParamByName('id').AsInteger := UsuarioLogadoID;
     Open;
 
@@ -77,8 +90,9 @@ begin
       if Trim(FieldByName('telefone').AsString) = '' then
         LabelTelefone.Caption := '! Cadastrar telefone'
       else
-        LabelTelefone.Caption := 'Telefone: ' + FieldByName('telefone').AsString;
-        labelTelefone.Font.Color:=Clwhite;
+        LabelTelefone.Caption := 'Telefone: ' + FieldByName('telefone')
+          .AsString;
+      LabelTelefone.Font.Color := Clwhite;
 
     end;
     Close;
@@ -113,64 +127,76 @@ begin
 
     Close;
   end;
-end;
-
-
-procedure TForm3.Image2Click(Sender: TObject);
+  // Após carregar os outros dados do usuário
+with DataModule2.FDQuery1 do
 begin
-  // Abre a tela para preencher habilidades e região
-  FormPrestador := TForm4.Create(Self);
-  try
-    pag_home.MostrarFormularioEmbed(FormPrestador);
-  finally
-    // Não libera ainda — o form será fechado manualmente
+  Close;
+  SQL.Text := 'SELECT image FROM usuario WHERE id_usuario = :id';
+  ParamByName('id').AsInteger := UsuarioLogadoID;
+  Open;
+
+  if not FieldByName('image').IsNull then
+  begin
+    // cria um stream temporário para ler o blob
+    var Stream := TMemoryStream.Create;
+    try
+      TBlobField(FieldByName('image')).SaveToStream(Stream);
+      Stream.Position := 0;
+      Image1.Picture.LoadFromStream(Stream); // carrega no TImage
+    finally
+      Stream.Free;
+    end;
+    Image1.Visible := True; // garante que a imagem carregada apareça
+  end
+  else
+  begin
+    // se não tiver imagem no banco, mostra a imagem padrão (a que já está no form)
+    Image1.Visible := True;
   end;
+
+  Close;
+end;
 end;
 
-
-procedure TForm3.Image5Click(Sender: TObject);
+procedure TForm3.LabelAlterarfotoClick(Sender: TObject);
 begin
-  pag_home.MostrarFormularioEmbed(Form5); // vai pra tela de edição
+  with TOpenDialog.Create(Self) do
+    try
+      Filter := 'Imagens|*.jpg;*.jpeg;*.png|Todos os arquivos|*.*';
+      if Execute then
+      begin
+        // Abre o registro para edição
+        with DataModule2.FDQuery1 do
+        begin
+          Close;
+          SQL.Text := 'SELECT * FROM usuario WHERE id_usuario = :id';
+          ParamByName('id').AsInteger := UsuarioLogadoID;
+          Open;
+
+          if not(State in [dsEdit, dsInsert]) then
+            Edit;
+
+          // Carrega a imagem no campo blob
+          TBlobField(FieldByName('image')).LoadFromFile(FileName);
+          Post;
+        end;
+
+        ShowMessage('Imagem salva com sucesso!');
+        Form3.FormShow(nil); // recarrega a imagem no perfil
+      end;
+    finally
+      Free;
+    end;
 end;
 
-
-procedure TForm3.Label1MouseEnter(Sender: TObject);
+procedure TForm3.LabelAlterarfotoMouseEnter(Sender: TObject);
 begin
-Label1.Enabled:=false
+  LabelAlterarfoto.Font.Color := clSkyBlue; // muda a cor quando o mouse entra
 end;
 
-procedure TForm3.Label1MouseLeave(Sender: TObject);
+procedure TForm3.LabelAlterarfotoMouseLeave(Sender: TObject);
 begin
-Label1.Enabled:=true
-end;
-
-procedure TForm3.Label2MouseEnter(Sender: TObject);
-begin
-Label2.Enabled:=false
-end;
-
-procedure TForm3.Label2MouseLeave(Sender: TObject);
-begin
-Label2.Enabled:=false
-end;
-
-procedure TForm3.retorna_ao_menuClick(Sender: TObject);
-begin
-    pag_home.MostrarFormularioEmbed(Form2);
-  Form2.CarregarServicos;
-end;
-
-
-
-procedure TForm3.Votlar_txtMouseEnter(Sender: TObject);
-begin
-Votlar_txt.Enabled:=false
-end;
-
-procedure TForm3.Votlar_txtMouseLeave(Sender: TObject);
-begin
-Votlar_txt.Enabled:=true
+  LabelAlterarfoto.Font.Color := Clwhite;
 end;
 
 end.
-

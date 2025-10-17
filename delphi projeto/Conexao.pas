@@ -16,10 +16,6 @@ type
     FDPhysFBDriverLink1: TFDPhysFBDriverLink;
     DataSource1: TDataSource;
     FDQuery1: TFDQuery;
-    FDQueryConta: TFDQuery;
-    DataSource2: TDataSource;
-    FDQueryServicos: TFDQuery;
-    DataSourceServicos: TDataSource;
   private
     { Private declarations }
   public

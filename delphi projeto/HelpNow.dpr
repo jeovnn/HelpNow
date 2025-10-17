@@ -13,7 +13,8 @@ uses
   EditarInformacoes in 'EditarInformacoes.pas' {Form5},
   EditarFornecedor in 'EditarFornecedor.pas' {Form6},
   CadastrarServico in 'CadastrarServico.pas' {Form7},
-  MeusServicos in 'MeusServicos.pas' {Form8};
+  MeusServicos in 'MeusServicos.pas' {Form8},
+  MaisInformacoesServico in 'MaisInformacoesServico.pas' {Form9};
 
 //Perfil in 'Perfil.pas' {Form2};
 
@@ -34,5 +35,6 @@ begin
   Application.CreateForm(TForm6, Form6);
   Application.CreateForm(TForm7, Form7);
   Application.CreateForm(TForm8, Form8);
+  Application.CreateForm(TForm9, Form9);
   Application.Run;
 end.

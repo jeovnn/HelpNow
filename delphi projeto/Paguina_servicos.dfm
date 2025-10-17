@@ -3873,6 +3873,7 @@ object Form2: TForm2
     TitleFont.Height = -12
     TitleFont.Name = 'Segoe UI'
     TitleFont.Style = []
+    OnCellClick = DBGrid1CellClick
   end
   object ButtonPerfil: TButton
     Left = 8

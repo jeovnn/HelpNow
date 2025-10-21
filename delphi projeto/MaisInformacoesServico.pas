@@ -35,6 +35,8 @@ type
     GroupBox3: TGroupBox;
     GroupBox4: TGroupBox;
     LinkLabel1: TLinkLabel;
+    Image1: TImage;
+    GroupBox5: TGroupBox;
     procedure ButtonVoltarClick(Sender: TObject);
     procedure FormHide(Sender: TObject);
     procedure LinkLabel1LinkClick(Sender: TObject; const Link: string;

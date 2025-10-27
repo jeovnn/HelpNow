@@ -17,8 +17,10 @@ type
     ButtonLogin: TButton;
     ButtonCadastro: TButton;
     Image2: TImage;
+    ButtonConvidado: TButton;
     procedure ButtonLoginClick(Sender: TObject);
     procedure ButtonCadastroClick(Sender: TObject);
+    procedure ButtonConvidadoClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -35,13 +37,18 @@ var
 implementation
 
 uses
-  pg_home, Paguina_login, Paguina_cadastro;
+  pg_home, Paguina_login, Paguina_cadastro,UnitConvidado;
 
 {$R *.dfm}
 
 procedure Tpag_inicial.ButtonCadastroClick(Sender: TObject);
 begin
 pag_home.MostrarFormularioEmbed(pag_cadastro);
+end;
+
+procedure Tpag_inicial.ButtonConvidadoClick(Sender: TObject);
+begin
+pag_home.MostrarFormularioEmbed(Form10);
 end;
 
 procedure Tpag_inicial.ButtonLoginClick(Sender: TObject);

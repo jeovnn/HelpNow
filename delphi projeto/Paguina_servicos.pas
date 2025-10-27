@@ -21,6 +21,7 @@ type
     EditPesquisa: TEdit;
     Label1: TLabel;
     ComboCategoria: TComboBox;
+    Label2: TLabel;
     procedure FormShow(Sender: TObject);
     procedure ButtonPerfilClick(Sender: TObject);
     procedure ButtonCadastrarServicoClick(Sender: TObject);

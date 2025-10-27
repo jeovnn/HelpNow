@@ -616,8 +616,8 @@ object Form2: TForm2
     ExplicitLeft = 8
   end
   object text_telaservicos: TLabel
-    Left = 320
-    Top = 134
+    Left = 336
+    Top = 126
     Width = 287
     Height = 31
     Alignment = taCenter
@@ -630,7 +630,7 @@ object Form2: TForm2
     ParentFont = False
   end
   object Image1: TImage
-    Left = 800
+    Left = 808
     Top = 8
     Width = 145
     Height = 137
@@ -3863,6 +3863,19 @@ object Form2: TForm2
     Width = 130
     Height = 18
     Caption = 'Pesquisar Servi'#231'o'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWhite
+    Font.Height = -15
+    Font.Name = 'Verdana'
+    Font.Style = []
+    ParentFont = False
+  end
+  object Label2: TLabel
+    Left = 672
+    Top = 174
+    Width = 146
+    Height = 18
+    Caption = 'Filtrar por categoria'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
     Font.Height = -15

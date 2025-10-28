@@ -613,14 +613,11 @@ object Form2: TForm2
       000010F640000580028140100500040003D805040000500150000A80000000A0
       F3F3657D527B0095C80461480A2B5005550506BD800F65050505500202828802
       800200282028000002000200A00280002000028FFFD9}
-    ExplicitLeft = 440
-    ExplicitTop = 248
-    ExplicitWidth = 105
-    ExplicitHeight = 105
+    ExplicitLeft = 8
   end
   object text_telaservicos: TLabel
     Left = 336
-    Top = 166
+    Top = 126
     Width = 287
     Height = 31
     Alignment = taCenter
@@ -633,10 +630,10 @@ object Form2: TForm2
     ParentFont = False
   end
   object Image1: TImage
-    Left = 400
+    Left = 808
     Top = 8
-    Width = 153
-    Height = 152
+    Width = 145
+    Height = 137
     Picture.Data = {
       0954506E67496D61676589504E470D0A1A0A0000000D49484452000003200000
       03200806000000DB700668000001A269545874584D4C3A636F6D2E61646F6265
@@ -3860,9 +3857,35 @@ object Form2: TForm2
       9DD8323EB4600000000049454E44AE426082}
     Stretch = True
   end
+  object Label1: TLabel
+    Left = 72
+    Top = 174
+    Width = 130
+    Height = 18
+    Caption = 'Pesquisar Servi'#231'o'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWhite
+    Font.Height = -15
+    Font.Name = 'Verdana'
+    Font.Style = []
+    ParentFont = False
+  end
+  object Label2: TLabel
+    Left = 672
+    Top = 174
+    Width = 146
+    Height = 18
+    Caption = 'Filtrar por categoria'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWhite
+    Font.Height = -15
+    Font.Name = 'Verdana'
+    Font.Style = []
+    ParentFont = False
+  end
   object DBGrid1: TDBGrid
-    Left = 64
-    Top = 232
+    Left = 72
+    Top = 224
     Width = 833
     Height = 287
     DataSource = DataModule2.DataSource1
@@ -3873,6 +3896,7 @@ object Form2: TForm2
     TitleFont.Height = -12
     TitleFont.Name = 'Segoe UI'
     TitleFont.Style = []
+    OnCellClick = DBGrid1CellClick
   end
   object ButtonPerfil: TButton
     Left = 8
@@ -3880,7 +3904,7 @@ object Form2: TForm2
     Width = 122
     Height = 25
     Caption = 'Meu perfil'
-    TabOrder = 1
+    TabOrder = 2
     OnClick = ButtonPerfilClick
   end
   object ButtonCadastrarServico: TButton
@@ -3889,7 +3913,7 @@ object Form2: TForm2
     Width = 122
     Height = 25
     Caption = 'Cadastrar Servi'#231'o'
-    TabOrder = 2
+    TabOrder = 3
     OnClick = ButtonCadastrarServicoClick
   end
   object ButtonMeusServicos: TButton
@@ -3898,7 +3922,25 @@ object Form2: TForm2
     Width = 122
     Height = 25
     Caption = 'Meus Servicos'
-    TabOrder = 3
+    TabOrder = 4
     OnClick = ButtonMeusServicosClick
+  end
+  object EditPesquisa: TEdit
+    Left = 72
+    Top = 195
+    Width = 233
+    Height = 23
+    TabOrder = 5
+    OnChange = EditPesquisaChange
+  end
+  object ComboCategoria: TComboBox
+    Left = 672
+    Top = 195
+    Width = 233
+    Height = 23
+    Style = csDropDownList
+    TabOrder = 1
+    TextHint = 'Filtrar por categoria...'
+    OnChange = ComboCategoriaChange
   end
 end

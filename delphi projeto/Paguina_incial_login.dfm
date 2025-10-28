@@ -629,7 +629,7 @@ object pag_inicial: Tpag_inicial
     end
     object text_login_inicial: TLabel
       Left = 350
-      Top = 219
+      Top = 163
       Width = 312
       Height = 31
       Alignment = taCenter
@@ -644,7 +644,7 @@ object pag_inicial: Tpag_inicial
     object descricao: TLabel
       AlignWithMargins = True
       Left = 350
-      Top = 272
+      Top = 216
       Width = 323
       Height = 70
       Alignment = taCenter
@@ -660,10 +660,10 @@ object pag_inicial: Tpag_inicial
       ParentFont = False
     end
     object Image1: TImage
-      Left = 384
-      Top = 10
-      Width = 249
-      Height = 240
+      Left = 408
+      Top = -10
+      Width = 209
+      Height = 191
       Picture.Data = {
         0954506E67496D61676589504E470D0A1A0A0000000D49484452000003200000
         03200806000000DB700668000001A269545874584D4C3A636F6D2E61646F6265
@@ -3889,7 +3889,7 @@ object pag_inicial: Tpag_inicial
     end
     object ButtonLogin: TButton
       Left = 432
-      Top = 371
+      Top = 323
       Width = 161
       Height = 42
       Caption = 'Login'
@@ -3904,7 +3904,7 @@ object pag_inicial: Tpag_inicial
     end
     object ButtonCadastro: TButton
       Left = 432
-      Top = 439
+      Top = 391
       Width = 161
       Height = 42
       Caption = 'Cadastro'
@@ -3916,6 +3916,21 @@ object pag_inicial: Tpag_inicial
       ParentFont = False
       TabOrder = 1
       OnClick = ButtonCadastroClick
+    end
+    object ButtonConvidado: TButton
+      Left = 432
+      Top = 457
+      Width = 161
+      Height = 42
+      Caption = 'Entrar como convidado'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 2
+      OnClick = ButtonConvidadoClick
     end
   end
 end

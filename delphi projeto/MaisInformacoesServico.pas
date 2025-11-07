@@ -52,12 +52,15 @@ var
 
 implementation
 uses
-Paguina_servicos,pg_home;
+Paguina_servicos,pg_home,UnitConvidado;
 {$R *.dfm}
 
 procedure TForm9.ButtonVoltarClick(Sender: TObject);
 begin
-  pag_home.MostrarFormularioEmbed(Form2);
+  if UsuarioConvidado then
+    pag_home.MostrarFormularioEmbed(Form10)  // volta para tela de convidado
+  else
+    pag_home.MostrarFormularioEmbed(Form2);  // volta para tela de serviços normal
 end;
 
 procedure TForm9.FormHide(Sender: TObject);

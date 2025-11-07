@@ -1,4 +1,4 @@
-unit Paguina_cadastro;
+ï»¿unit Paguina_cadastro;
 
 interface
 
@@ -18,7 +18,7 @@ type
     painel_email: TPanel;
     label_email: TLabel;
     email_cad: TEdit;
-    painel_senha_confirmação: TPanel;
+    painel_senha_confirmaÃ§Ã£o: TPanel;
     cpf: TEdit;
     painel_nome: TPanel;
     label_nome: TLabel;
@@ -26,10 +26,10 @@ type
     painel_senha: TPanel;
     label_senha1: TLabel;
     senha_cad: TEdit;
-    email_direção: TLabel;
-    nome_direção: TLabel;
-    senha_conf_direção: TLabel;
-    senha_direção: TLabel;
+    email_direÃ§Ã£o: TLabel;
+    nome_direÃ§Ã£o: TLabel;
+    senha_conf_direÃ§Ã£o: TLabel;
+    senha_direÃ§Ã£o: TLabel;
     Label1: TLabel;
     Image2: TImage;
     ButtonVoltar: TButton;
@@ -40,6 +40,9 @@ type
     procedure Button1Click(Sender: TObject);
   private
     { Private declarations }
+    function EmailValido(const Email: string): Boolean;
+    function CPFValido(cpf: string): Boolean;
+
   public
     { Public declarations }
   end;
@@ -60,6 +63,20 @@ procedure Tpag_cadastro.Button1Click(Sender: TObject);
 var
   NovoIDUsuario, NovoIDConta: Integer;
 begin
+
+  // Validar email
+  if not EmailValido(email_cad.Text) then
+  begin
+    ShowMessage('E-mail invÃ¡lido! Digite um e-mail vÃ¡lido.');
+    Exit;
+  end;
+
+  // Validar CPF
+  if not CPFValido(cpf.Text) then
+  begin
+    ShowMessage('CPF invÃ¡lido! Verifique e tente novamente.');
+    Exit;
+  end;
   if Trim(email_cad.Text) = '' then
   begin
     ShowMessage('Digite seu e-mail.');
@@ -84,31 +101,63 @@ begin
     Exit;
   end;
 
+  // ðŸ”¹ VALIDAR SE EMAIL JÃ EXISTE
+  with DataModule2.FDQuery1 do
+  begin
+    Close;
+    SQL.Text := 'SELECT COUNT(*) AS total FROM usuario WHERE email = :email';
+    ParamByName('email').AsString := email_cad.Text;
+    Open;
+
+    if FieldByName('total').AsInteger > 0 then
+    begin
+      ShowMessage('Este e-mail jÃ¡ estÃ¡ cadastrado! Tente outro.');
+      Exit;
+    end;
+  end;
+
+  // ðŸ”¹ VALIDAR SE CPF JÃ EXISTE
+  with DataModule2.FDQuery1 do
+  begin
+    Close;
+    SQL.Text := 'SELECT COUNT(*) AS total FROM usuario WHERE cpf = :cpf';
+    ParamByName('cpf').AsString := cpf.Text;
+    Open;
+
+    if FieldByName('total').AsInteger > 0 then
+    begin
+      ShowMessage('Este CPF jÃ¡ estÃ¡ cadastrado! Verifique e tente novamente.');
+      Exit;
+    end;
+  end;
+
+  // âœ… Se passou em todas validaÃ§Ãµes â†’ Continua cadastro
   try
-    // 1) Gerar o próximo id_usuario manualmente
+    // 1) Gerar o prÃ³ximo id_usuario manualmente
     with DataModule2.FDQuery1 do
     begin
-      SQL.Text := 'SELECT COALESCE(MAX(id_usuario), 0) + 1 AS prox FROM usuario';
+      SQL.Text :=
+        'SELECT COALESCE(MAX(id_usuario), 0) + 1 AS prox FROM usuario';
       Open;
       NovoIDUsuario := FieldByName('prox').AsInteger;
       Close;
     end;
 
-    // 2) Inserir na tabela usuario   //esse : é tipo pra deixar reservado um espaço pra colocar o dado durante a execução
+    // 2) Inserir na tabela usuario
     with DataModule2.FDQuery1 do
     begin
       SQL.Text :=
         'INSERT INTO usuario (id_usuario, email, nome, cpf, data_cadastro) ' +
         'VALUES (:id, :email, :nome, :cpf, :data_cadastro)';
-      ParamByName('id').AsInteger         := NovoIDUsuario;
-      ParamByName('email').AsString       := email_cad.Text;
-      ParamByName('nome').AsString        := nome_cad.Text;
-      ParamByName('cpf').AsString    := cpf.Text;
+      ParamByName('id').AsInteger := NovoIDUsuario;
+      ParamByName('email').AsString := email_cad.Text;
+      ParamByName('nome').AsString := nome_cad.Text;
+      ParamByName('cpf').AsString := cpf.Text;
       ParamByName('data_cadastro').AsDate := Date;
       ExecSQL;
     end;
 
-    // 3) Gerar o próximo id_conta manualmente
+    // 3) Gerar o prÃ³ximo id_conta manualmente
     with DataModule2.FDQuery1 do
     begin
       SQL.Text := 'SELECT COALESCE(MAX(id_conta), 0) + 1 AS prox FROM conta';
@@ -124,11 +173,11 @@ begin
       SQL.Text :=
         'INSERT INTO conta (id_conta, id_usuario, usuario, senha, tipo) ' +
         'VALUES (:id_conta, :id_usuario, :usuario, :senha, :tipo)';
-      ParamByName('id_conta').AsInteger   := NovoIDConta;
+      ParamByName('id_conta').AsInteger := NovoIDConta;
       ParamByName('id_usuario').AsInteger := NovoIDUsuario;
-      ParamByName('usuario').AsString     := email_cad.Text;
-      ParamByName('senha').AsString       := senha_cad.Text;
-      ParamByName('tipo').AsString        := 'cliente';
+      ParamByName('usuario').AsString := email_cad.Text;
+      ParamByName('senha').AsString := senha_cad.Text;
+      ParamByName('tipo').AsString := 'cliente';
       ExecSQL;
     end;
 
@@ -143,14 +192,54 @@ end;
 
 procedure Tpag_cadastro.ButtonVoltarClick(Sender: TObject);
 begin
-pag_home.MostrarFormularioEmbed(pag_inicial);
+  pag_home.MostrarFormularioEmbed(pag_inicial);
+end;
+
+function Tpag_cadastro.CPFValido(cpf: string): Boolean;
+var
+  I, Digito1, Digito2, Soma, Resto: Integer;
+begin
+  cpf := StringReplace(cpf, '.', '', [rfReplaceAll]);
+  cpf := StringReplace(cpf, '-', '', [rfReplaceAll]);
+
+  // precisa ter 11 nÃºmeros
+  if Length(cpf) <> 11 then
+    Exit(False);
+
+  // rejeita CPFs repetidos: 11111111111, 22222222222...
+  if cpf = StringOfChar(cpf[1], 11) then
+    Exit(False);
+
+  // Calcula primeiro dÃ­gito
+  Soma := 0;
+  for I := 1 to 9 do
+    Soma := Soma + (StrToInt(cpf[I]) * (11 - I));
+  Resto := (Soma * 10) mod 11;
+  if (Resto = 10) or (Resto = 11) then
+    Resto := 0;
+  Digito1 := Resto;
+
+  // Calcula segundo dÃ­gito
+  Soma := 0;
+  for I := 1 to 10 do
+    Soma := Soma + (StrToInt(cpf[I]) * (12 - I));
+  Resto := (Soma * 10) mod 11;
+  if (Resto = 10) or (Resto = 11) then
+    Resto := 0;
+  Digito2 := Resto;
+
+  Result := (Digito1 = StrToInt(cpf[10])) and (Digito2 = StrToInt(cpf[11]));
+end;
+
+function Tpag_cadastro.EmailValido(const Email: string): Boolean;
+begin
+  Result := (Pos('@', Email) > 1) and (Pos('.', Email) > Pos('@', Email) + 1)
+    and (Email[Length(Email)] <> '.');
 end;
 
 procedure Tpag_cadastro.goto_cadastroClick(Sender: TObject);
 begin
   pag_home.MostrarFormularioEmbed(pag_login);
 end;
-
-
 
 end.

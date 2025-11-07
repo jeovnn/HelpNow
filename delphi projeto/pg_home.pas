@@ -28,6 +28,7 @@ type
 var
   pag_home: Tpag_home;
   UsuarioLogadoID: Integer;
+  UsuarioConvidado: Boolean = False;
 
 implementation
 

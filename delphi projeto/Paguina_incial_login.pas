@@ -43,16 +43,19 @@ uses
 
 procedure Tpag_inicial.ButtonCadastroClick(Sender: TObject);
 begin
+UsuarioConvidado := False;
 pag_home.MostrarFormularioEmbed(pag_cadastro);
 end;
 
 procedure Tpag_inicial.ButtonConvidadoClick(Sender: TObject);
 begin
+UsuarioConvidado := True;
 pag_home.MostrarFormularioEmbed(Form10);
 end;
 
 procedure Tpag_inicial.ButtonLoginClick(Sender: TObject);
 begin
+UsuarioConvidado := False;
 pag_home.MostrarFormularioEmbed(pag_login);
 end;
 

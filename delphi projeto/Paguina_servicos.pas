@@ -7,7 +7,8 @@ uses
   System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.Grids, Vcl.DBGrids,
   Conexao, Vcl.StdCtrls, Vcl.Imaging.pngimage, Vcl.ExtCtrls, paguina_perfil,
-  pg_home, Vcl.Imaging.jpeg,CadastrarServico,meusservicos,MaisInformacoesServico;
+  pg_home, Vcl.Imaging.jpeg, CadastrarServico, meusservicos,
+  MaisInformacoesServico;
 
 type
   TForm2 = class(TForm)
@@ -74,10 +75,8 @@ begin
 
     while not EOF do
     begin
-      ComboCategoria.Items.AddObject(
-        FieldByName('nome').AsString,
-        TObject(FieldByName('id_categoria').AsInteger)
-      );
+      ComboCategoria.Items.AddObject(FieldByName('nome').AsString,
+        TObject(FieldByName('id_categoria').AsInteger));
       Next;
     end;
 
@@ -88,6 +87,7 @@ begin
   ComboCategoria.Items.Insert(0, 'Todas as categorias');
   ComboCategoria.ItemIndex := 0;
 end;
+
 procedure TForm2.CarregarServicos;
 begin
   if not DataModule2.FDConnection1.Connected then
@@ -115,7 +115,8 @@ begin
     Exit;
   end;
 
-  CategoriaID := Integer(ComboCategoria.Items.Objects[ComboCategoria.ItemIndex]);
+  CategoriaID := Integer(ComboCategoria.Items.Objects
+    [ComboCategoria.ItemIndex]);
 
   if not DataModule2.FDConnection1.Connected then
     DataModule2.FDConnection1.Connected := True;
@@ -123,18 +124,15 @@ begin
   with DataModule2.FDQuery1 do
   begin
     Close;
-    SQL.Text :=
-      'SELECT id_servico, titulo, preco ' +
-      'FROM servico ' +
-      'WHERE id_categoria = :cat ' +
-      'ORDER BY titulo';
+    SQL.Text := 'SELECT id_servico, titulo, preco ' + 'FROM servico ' +
+      'WHERE id_categoria = :cat ' + 'ORDER BY titulo';
     ParamByName('cat').AsInteger := CategoriaID;
     Open;
   end;
 end;
 
 procedure TForm2.DBGrid1CellClick(Column: TColumn);
-  // 🔹 função local
+// 🔹 função local
   function QuebrarTexto(const Texto: string; Max: Integer): string;
   var
     i, Count: Integer;
@@ -156,11 +154,13 @@ procedure TForm2.DBGrid1CellClick(Column: TColumn);
     end;
     Result := Result + Trim(Linha);
   end;
+
 var
   IDServico: Integer;
   Stream: TMemoryStream;
 begin
-  if DataModule2.FDQuery1.IsEmpty then Exit;
+  if DataModule2.FDQuery1.IsEmpty then
+    Exit;
 
   IDServico := DataModule2.FDQuery1.FieldByName('id_servico').AsInteger;
 
@@ -169,9 +169,8 @@ begin
     with DataModule2.FDQueryServicos do
     begin
       Close;
-      SQL.Text :=
-        'SELECT s.titulo, s.descricao, s.preco, c.nome AS categoria, ' +
-        'u.nome AS prestador, u.telefone, u.email, p.regiao, u.image ' +
+      SQL.Text := 'SELECT s.titulo, s.descricao, s.preco, c.nome AS categoria, '
+        + 'u.nome AS prestador, u.telefone, u.email, p.regiao, u.image ' +
         'FROM servico s ' +
         'LEFT JOIN categoria c ON c.id_categoria = s.id_categoria ' +
         'LEFT JOIN prestador p ON p.id_prestador = s.id_prestador ' +
@@ -182,15 +181,18 @@ begin
 
       if not EOF then
       begin
-        Form9.LabelTitulodobanco.Caption    := FieldByName('titulo').AsString;
-        Form9.LabelDescricaodobanco.Caption := QuebrarTexto(FieldByName('descricao').AsString, 40);
+        Form9.LabelTitulodobanco.Caption := FieldByName('titulo').AsString;
+        Form9.LabelDescricaodobanco.Caption :=
+          QuebrarTexto(FieldByName('descricao').AsString, 40);
         Form9.LabelDescricaodobanco.WordWrap := True;
-        Form9.LabelValordobanco.Caption     := 'R$ ' + FormatFloat('0.00', FieldByName('preco').AsFloat);
-        Form9.LabelCategoriaBanco.Caption   := FieldByName('categoria').AsString;
-        Form9.LabelPrestadordobanco.Caption := FieldByName('prestador').AsString;
-        Form9.LabelTelefonedobanco.Caption  := FieldByName('telefone').AsString;
-        Form9.LabelEmaildobanco.Caption     := FieldByName('email').AsString;
-        Form9.LabelRegiaodobanco.Caption    := FieldByName('regiao').AsString;
+        Form9.LabelValordobanco.Caption := 'R$ ' + FormatFloat('0.00',
+          FieldByName('preco').AsFloat);
+        Form9.LabelCategoriaBanco.Caption := FieldByName('categoria').AsString;
+        Form9.LabelPrestadordobanco.Caption := FieldByName('prestador')
+          .AsString;
+        Form9.LabelTelefonedobanco.Caption := FieldByName('telefone').AsString;
+        Form9.LabelEmaildobanco.Caption := FieldByName('email').AsString;
+        Form9.LabelRegiaodobanco.Caption := FieldByName('regiao').AsString;
 
         // imagem
         if not FieldByName('image').IsNull then
@@ -199,13 +201,18 @@ begin
           try
             TBlobField(FieldByName('image')).SaveToStream(Stream);
             Stream.Position := 0;
-            Form9.Imageperfil.Picture.LoadFromStream(Stream);
+            Form9.ImagePerfil.Picture.LoadFromStream(Stream);
           finally
             Stream.Free;
           end;
         end
         else
-          Form9.Imageperfil.Picture := nil;
+        begin
+          // NÃO limpa a imagem para manter a default do Form
+          // Apenas garante ajustes visuais caso queira
+          Form9.ImagePerfil.Stretch := True;
+          Form9.ImagePerfil.Proportional := True;
+        end;
       end;
     end;
 
@@ -230,12 +237,12 @@ begin
     Close;
 
     if TextoPesquisa = '' then
-      SQL.Text := 'SELECT id_servico, titulo, preco FROM servico ORDER BY titulo'
+      SQL.Text :=
+        'SELECT id_servico, titulo, preco FROM servico ORDER BY titulo'
     else
     begin
       SQL.Text := 'SELECT id_servico, titulo, preco FROM servico ' +
-                  'WHERE UPPER(titulo) LIKE :titulo ' +
-                  'ORDER BY titulo';
+        'WHERE UPPER(titulo) LIKE :titulo ' + 'ORDER BY titulo';
       ParamByName('titulo').AsString := '%' + UpperCase(TextoPesquisa) + '%';
     end;
 
@@ -247,7 +254,7 @@ procedure TForm2.FormShow(Sender: TObject);
 begin
   CarregarServicos;
   CarregarCategorias;
-   // Verifica o tipo de conta do usuário logado
+  // Verifica o tipo de conta do usuário logado
   if not DataModule2.FDConnection1.Connected then
     DataModule2.FDConnection1.Connected := True;
 

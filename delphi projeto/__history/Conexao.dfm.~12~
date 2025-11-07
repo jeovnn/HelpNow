@@ -1,11 +1,17 @@
 object DataModule2: TDataModule2
+<<<<<<< HEAD
   Height = 671
   Width = 910
   PixelsPerInch = 120
+=======
+  Height = 537
+  Width = 728
+>>>>>>> 3ee3812e504db39a9244a58c8c402d29f4ad420e
   object FDConnection1: TFDConnection
     Params.Strings = (
       'User_Name=sysdba'
       'Password=masterkey'
+<<<<<<< HEAD
       
         'Database=C:\Users\arthu\Documents\delphi\trabalho conehcimento a' +
         'plicado\Git Connection\HelpNow\WELPNOW.FDB'
@@ -26,5 +32,25 @@ object DataModule2: TDataModule2
     Connection = FDConnection1
     Left = 310
     Top = 50
+=======
+      'Database=C:\Users\jeova\Bancos\WELPNOW3.FDB'
+      'DriverID=FB')
+    Left = 128
+    Top = 40
+  end
+  object FDPhysFBDriverLink1: TFDPhysFBDriverLink
+    Left = 128
+    Top = 120
+  end
+  object DataSource1: TDataSource
+    DataSet = FDQuery1
+    Left = 352
+    Top = 40
+  end
+  object FDQuery1: TFDQuery
+    Connection = FDConnection1
+    Left = 248
+    Top = 40
+>>>>>>> 3ee3812e504db39a9244a58c8c402d29f4ad420e
   end
 end

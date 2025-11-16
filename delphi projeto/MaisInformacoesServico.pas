@@ -1,11 +1,13 @@
-unit MaisInformacoesServico;
+Ôªøunit MaisInformacoesServico;
 
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Imaging.jpeg, Vcl.ExtCtrls, Data.DB,
-  Vcl.Grids, Vcl.DBGrids, Vcl.StdCtrls, Vcl.Imaging.pngimage,ShellAPI,conexao;
+  Vcl.Grids, Vcl.DBGrids, Vcl.StdCtrls, Vcl.Imaging.pngimage, ShellAPI, conexao,
+  unit11;
 
 type
   TForm9 = class(TForm)
@@ -37,46 +39,67 @@ type
     LinkLabel1: TLinkLabel;
     Image1: TImage;
     GroupBox5: TGroupBox;
+    ButtonAvaliar: TButton;
+    LabelVerAvaliacoes: TLabel;
+    Image2: TImage;
     procedure ButtonVoltarClick(Sender: TObject);
     procedure FormHide(Sender: TObject);
     procedure LinkLabel1LinkClick(Sender: TObject; const Link: string;
       LinkType: TSysLinkType);
+    procedure ButtonAvaliarClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
   public
     { Public declarations }
+    IDServico: Integer;
   end;
 
 var
   Form9: TForm9;
 
 implementation
+
 uses
-Paguina_servicos,pg_home,UnitConvidado;
+  Paguina_servicos, pg_home, UnitConvidado;
 {$R *.dfm}
+
+procedure TForm9.ButtonAvaliarClick(Sender: TObject);
+begin
+  Form11 := TForm11.Create(Self);
+  Form11.IDServicoAvaliar := IDServico; // ‚Üê passe o ID certo!
+  pag_home.MostrarFormularioEmbed(Form11);
+end;
 
 procedure TForm9.ButtonVoltarClick(Sender: TObject);
 begin
   if UsuarioConvidado then
-    pag_home.MostrarFormularioEmbed(Form10)  // volta para tela de convidado
+    pag_home.MostrarFormularioEmbed(Form10) // volta para tela de convidado
   else
-    pag_home.MostrarFormularioEmbed(Form2);  // volta para tela de serviÁos normal
+    pag_home.MostrarFormularioEmbed(Form2);
+  // volta para tela de servi√ßos normal
 end;
 
 procedure TForm9.FormHide(Sender: TObject);
 begin
   // Limpa todas as labels
-  LabelTitulodobanco.Caption      := '';
-  LabelDescricaodobanco.Caption   := '';
-  LabelValordobanco.Caption       := '';
-  LabelCategoriaBanco.Caption     := '';
-  LabelPrestadordobanco.Caption   := '';
-  LabelTelefonedobanco.Caption    := '';
-  LabelEmaildobanco.Caption       := '';
-  LabelRegiaodobanco.Caption      := '';
+  LabelTitulodobanco.Caption := '';
+  LabelDescricaodobanco.Caption := '';
+  LabelValordobanco.Caption := '';
+  LabelCategoriaBanco.Caption := '';
+  LabelPrestadordobanco.Caption := '';
+  LabelTelefonedobanco.Caption := '';
+  LabelEmaildobanco.Caption := '';
+  LabelRegiaodobanco.Caption := '';
 
   // Limpa a imagem
   td.Picture := nil;
+end;
+
+procedure TForm9.FormShow(Sender: TObject);
+begin
+ if UsuarioConvidado then
+    buttonavaliar.Visible:= false;
 end;
 
 procedure TForm9.LinkLabel1LinkClick(Sender: TObject; const Link: string;
@@ -87,16 +110,15 @@ begin
   if not DataModule2.FDConnection1.Connected then
     DataModule2.FDConnection1.Connected := True;
 
-  // busca o telefone do prestador do serviÁo mostrado na tela
+  // busca o telefone do prestador do servi√ßo mostrado na tela
   with DataModule2.FDQuery1 do
   begin
     Close;
-    SQL.Text :=
-      'SELECT u.telefone ' +
-      'FROM usuario u ' +
+    SQL.Text := 'SELECT u.telefone ' + 'FROM usuario u ' +
       'JOIN prestador p ON p.id_usuario = u.id_usuario ' +
       'JOIN servico s ON s.id_prestador = p.id_prestador ' +
-      'WHERE s.titulo = :titulo'; // ou o campo que vocÍ usa pra identificar o serviÁo
+      'WHERE s.titulo = :titulo';
+    // ou o campo que voc√™ usa pra identificar o servi√ßo
     ParamByName('titulo').AsString := LabelTitulodobanco.Caption;
     Open;
 
@@ -104,7 +126,7 @@ begin
       Numero := Trim(FieldByName('telefone').AsString)
     else
     begin
-      ShowMessage('Telefone n„o encontrado para este prestador.');
+      ShowMessage('Telefone n√£o encontrado para este prestador.');
       Exit;
     end;
     Close;
@@ -118,11 +140,12 @@ begin
 
   if Numero = '' then
   begin
-    ShowMessage('Prestador n„o possui telefone cadastrado.');
+    ShowMessage('Prestador n√£o possui telefone cadastrado.');
     Exit;
   end;
 
-  Mensagem := 'Ol·! Gostaria de mais informaÁıes sobre o serviÁo: ' + LabelTitulodobanco.Caption;
+  Mensagem := 'Ol√°! Gostaria de mais informa√ß√µes sobre o servi√ßo: ' +
+    LabelTitulodobanco.Caption;
   Mensagem := StringReplace(Mensagem, ' ', '%20', [rfReplaceAll]);
   LinkWhats := 'https://wa.me/55' + Numero + '?text=' + Mensagem;
 

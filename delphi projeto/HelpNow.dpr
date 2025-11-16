@@ -15,7 +15,8 @@ uses
   CadastrarServico in 'CadastrarServico.pas' {Form7},
   MeusServicos in 'MeusServicos.pas' {Form8},
   MaisInformacoesServico in 'MaisInformacoesServico.pas' {Form9},
-  UnitConvidado in 'UnitConvidado.pas' {Form10};
+  UnitConvidado in 'UnitConvidado.pas' {Form10},
+  Unit11 in 'Unit11.pas' {Form11};
 
 //Perfil in 'Perfil.pas' {Form2};
 
@@ -38,5 +39,6 @@ begin
   Application.CreateForm(TForm8, Form8);
   Application.CreateForm(TForm9, Form9);
   Application.CreateForm(TForm10, Form10);
+  Application.CreateForm(TForm11, Form11);
   Application.Run;
 end.

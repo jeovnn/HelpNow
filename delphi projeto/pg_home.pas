@@ -61,7 +61,6 @@ begin
   if Assigned(Form3) then
     Form3.Visible := False;
 
-
   // Embed the requested form
   AForm.Parent := Panel1;
   AForm.BorderStyle := bsNone;

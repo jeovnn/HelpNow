@@ -102,6 +102,10 @@ begin
 
   DataModule2.DataSource1.DataSet := DataModule2.FDQuery1;
   DBGrid1.DataSource := DataModule2.DataSource1;
+
+  // 🔹 Oculta a coluna do ID após abrir e carregar no grid
+  if DBGrid1.Columns.Count > 0 then
+    DBGrid1.Columns[0].Visible := False;
 end;
 
 procedure TForm2.ComboCategoriaChange(Sender: TObject);
@@ -215,7 +219,7 @@ begin
         end;
       end;
     end;
-
+    Form9.IDServico := IDServico;
     pag_home.MostrarFormularioEmbed(Form9);
   except
     Form9.Free;
@@ -254,6 +258,7 @@ procedure TForm2.FormShow(Sender: TObject);
 begin
   CarregarServicos;
   CarregarCategorias;
+
   // Verifica o tipo de conta do usuário logado
   if not DataModule2.FDConnection1.Connected then
     DataModule2.FDConnection1.Connected := True;

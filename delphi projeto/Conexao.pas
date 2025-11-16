@@ -17,13 +17,8 @@ type
     DataSource1: TDataSource;
     FDQuery1: TFDQuery;
     FDQueryConta: TFDQuery;
-<<<<<<< HEAD
     DataSource2: TDataSource;
     FDQueryServicos: TFDQuery;
-=======
-    FDQueryServicos: TFDQuery;
-    DataSource2: TDataSource;
->>>>>>> d7a48aa5d530ce378017d02c47c8e6d354003960
     DataSourceServicos: TDataSource;
   private
     { Private declarations }

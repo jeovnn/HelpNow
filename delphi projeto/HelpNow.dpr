@@ -16,7 +16,8 @@ uses
   MeusServicos in 'MeusServicos.pas' {Form8},
   MaisInformacoesServico in 'MaisInformacoesServico.pas' {Form9},
   UnitConvidado in 'UnitConvidado.pas' {Form10},
-  Unit11 in 'Unit11.pas' {Form11};
+  Unit11 in 'Unit11.pas' {Form11},
+  Unit12 in 'Unit12.pas' {Form12};
 
 //Perfil in 'Perfil.pas' {Form2};
 
@@ -28,6 +29,7 @@ begin
   Application.CreateForm(Tpag_home, pag_home);
   Application.CreateForm(Tpag_inicial, pag_inicial);
   Application.CreateForm(Tpag_login, pag_login);
+  Application.CreateForm(TForm9, Form9);
   Application.CreateForm(Tpag_cadastro, pag_cadastro);
   Application.CreateForm(TDataModule2, DataModule2);
   Application.CreateForm(TForm2, Form2);
@@ -37,8 +39,8 @@ begin
   Application.CreateForm(TForm6, Form6);
   Application.CreateForm(TForm7, Form7);
   Application.CreateForm(TForm8, Form8);
-  Application.CreateForm(TForm9, Form9);
   Application.CreateForm(TForm10, Form10);
   Application.CreateForm(TForm11, Form11);
+  Application.CreateForm(TForm12, Form12);
   Application.Run;
 end.

@@ -20,6 +20,8 @@ type
     DataSource2: TDataSource;
     FDQueryServicos: TFDQuery;
     DataSourceServicos: TDataSource;
+    FDQueryAvaliacoes: TFDQuery;
+    DataSourceAvaliacoes: TDataSource;
   private
     { Private declarations }
   public

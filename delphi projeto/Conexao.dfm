@@ -7,6 +7,7 @@ object DataModule2: TDataModule2
       'Password=masterkey'
       'Database=C:\Users\jeova\Bancos\WELPNOW3.FDB'
       'DriverID=FB')
+    Connected = True
     Left = 128
     Top = 40
   end
@@ -43,5 +44,17 @@ object DataModule2: TDataModule2
     DataSet = FDQueryServicos
     Left = 328
     Top = 384
+  end
+  object FDQueryAvaliacoes: TFDQuery
+    Connection = FDConnection1
+    SQL.Strings = (
+      '')
+    Left = 248
+    Top = 448
+  end
+  object DataSourceAvaliacoes: TDataSource
+    DataSet = FDQueryAvaliacoes
+    Left = 328
+    Top = 448
   end
 end

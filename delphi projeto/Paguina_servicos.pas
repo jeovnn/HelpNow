@@ -20,9 +20,9 @@ type
     ButtonMeusServicos: TButton;
     Image2: TImage;
     EditPesquisa: TEdit;
-    Label1: TLabel;
+    LabelPesquisar: TLabel;
     ComboCategoria: TComboBox;
-    Label2: TLabel;
+    LabelFiltroCategoria: TLabel;
     procedure FormShow(Sender: TObject);
     procedure ButtonPerfilClick(Sender: TObject);
     procedure ButtonCadastrarServicoClick(Sender: TObject);
@@ -167,7 +167,6 @@ begin
     Exit;
 
   IDServico := DataModule2.FDQuery1.FieldByName('id_servico').AsInteger;
-
   Form9 := TForm9.Create(Self);
   try
     with DataModule2.FDQueryServicos do
@@ -256,6 +255,7 @@ end;
 
 procedure TForm2.FormShow(Sender: TObject);
 begin
+DBGrid1.OnCellClick := DBGrid1CellClick;
   CarregarServicos;
   CarregarCategorias;
 

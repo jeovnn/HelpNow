@@ -3857,7 +3857,7 @@ object Form2: TForm2
       9DD8323EB4600000000049454E44AE426082}
     Stretch = True
   end
-  object Label1: TLabel
+  object LabelPesquisar: TLabel
     Left = 72
     Top = 174
     Width = 130
@@ -3870,7 +3870,7 @@ object Form2: TForm2
     Font.Style = []
     ParentFont = False
   end
-  object Label2: TLabel
+  object LabelFiltroCategoria: TLabel
     Left = 672
     Top = 174
     Width = 146

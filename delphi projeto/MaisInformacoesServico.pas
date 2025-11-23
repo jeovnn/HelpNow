@@ -7,7 +7,7 @@ uses
   System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Imaging.jpeg, Vcl.ExtCtrls, Data.DB,
   Vcl.Grids, Vcl.DBGrids, Vcl.StdCtrls, Vcl.Imaging.pngimage, ShellAPI, conexao,
-  unit11;
+  unit11,unit12;
 
 type
   TForm9 = class(TForm)
@@ -41,18 +41,24 @@ type
     GroupBox5: TGroupBox;
     ButtonAvaliar: TButton;
     LabelVerAvaliacoes: TLabel;
-    Image2: TImage;
+    ImageAvaliacao: TImage;
+    LabelQtdeAvaliacoes: TLabel;
     procedure ButtonVoltarClick(Sender: TObject);
     procedure FormHide(Sender: TObject);
     procedure LinkLabel1LinkClick(Sender: TObject; const Link: string;
       LinkType: TSysLinkType);
     procedure ButtonAvaliarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure LabelVerAvaliacoesMouseLeave(Sender: TObject);
+    procedure LabelVerAvaliacoesMouseEnter(Sender: TObject);
+    procedure LabelVerAvaliacoesClick(Sender: TObject);
+
   private
     { Private declarations }
   public
     { Public declarations }
     IDServico: Integer;
+
   end;
 
 var
@@ -98,10 +104,27 @@ end;
 
 procedure TForm9.FormShow(Sender: TObject);
 begin
+LabelQtdeAvaliacoes.caption:= '0 avaliacoes';
  if UsuarioConvidado then
     buttonavaliar.Visible:= false;
 end;
 
+procedure TForm9.LabelVerAvaliacoesClick(Sender: TObject);
+begin
+pag_home.MostrarFormularioEmbed(Form12);
+end;
+
+procedure TForm9.LabelVerAvaliacoesMouseEnter(Sender: TObject);
+begin
+  LabelVerAvaliacoes.Font.Color := clBlue;     // muda cor
+  LabelVerAvaliacoes.Cursor := crHandPoint;    // cursor de link
+end;
+
+procedure TForm9.LabelVerAvaliacoesMouseLeave(Sender: TObject);
+begin
+  LabelVerAvaliacoes.Font.Color := clBtnFace;     // muda cor
+  LabelVerAvaliacoes.Cursor := crHandPoint;    // cursor de link
+end;
 procedure TForm9.LinkLabel1LinkClick(Sender: TObject; const Link: string;
   LinkType: TSysLinkType);
 var
